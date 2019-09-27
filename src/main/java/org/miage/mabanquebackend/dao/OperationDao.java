@@ -12,6 +12,4 @@ public interface OperationDao extends JpaRepository<Operation, Integer> {
 
 	List<Operation> findAllByCompte(Compte compte);
 
-	List<Operation> findAllByCompte(int compteId);
-
 }

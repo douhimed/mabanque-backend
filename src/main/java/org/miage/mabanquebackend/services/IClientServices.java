@@ -8,6 +8,7 @@ import org.miage.mabanquebackend.web.models.Operation;
 
 public interface IClientServices {
 	
+	Client getClient(int clientId);
 	List<Compte> getComptesByClient(Client client);	
 	List<Operation> getOperationsByCompte(Compte compte);
 	

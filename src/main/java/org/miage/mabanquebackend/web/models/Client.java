@@ -8,6 +8,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -23,6 +25,10 @@ public class Client {
 	@OneToMany(mappedBy = "client", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JsonIgnoreProperties("client")
 	private Collection<Compte> comptes;
+	@ManyToOne
+	@JoinColumn(name = "CODE_CONSEILLER")
+	@JsonIgnoreProperties("clients")
+	private Employe conseiller;
 
 	public Client() {
 	}
@@ -117,6 +123,14 @@ public class Client {
 
 	public void setComptes(Collection<Compte> comptes) {
 		this.comptes = comptes;
+	}
+	
+	public Employe getConseiller() {
+		return conseiller;
+	}
+	
+	public void setConseiller(Employe conseiller) {
+		this.conseiller = conseiller;
 	}
 
 }
