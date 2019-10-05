@@ -30,17 +30,23 @@ public abstract class Operation {
 	@JoinColumn(name="NUM_COMPTE")
 	@JsonIgnoreProperties("operations")
 	private Compte compte;
+	protected String type;
 
 	public Operation() {
+		this.setType();
+	}
+
+	public Operation(double montant, Compte compte) {
+		this();
+		this.montant = montant;
+		this.compte = compte;
 
 	}
 
 	public Operation(int id, Date dateOperation, double montant, Compte compte) {
-		super();
+		this(montant, compte);
 		this.id = id;
 		this.dateOperation = dateOperation;
-		this.montant = montant;
-		this.compte = compte;
 	}
 
 	public int getId() {
@@ -74,6 +80,13 @@ public abstract class Operation {
 	public void setCompte(Compte compte) {
 		this.compte = compte;
 	}
+	
+	
+	public String getType() {
+		return type;
+	}
+	
+	public abstract void setType();
 
 
 }

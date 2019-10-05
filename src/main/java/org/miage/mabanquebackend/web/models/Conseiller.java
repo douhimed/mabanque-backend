@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @DiscriminatorValue("C")
 public class Conseiller extends Employe {
 
-	@OneToMany(mappedBy = "conseiller", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "conseiller", fetch = FetchType.LAZY)
 	@JsonIgnoreProperties("conseiller")
 	private Collection<Client> clients = new ArrayList<Client>();
 	

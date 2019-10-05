@@ -18,11 +18,15 @@ public class Agence {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	@OneToMany(mappedBy = "agence", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "agence", fetch = FetchType.LAZY)
 	@JsonIgnoreProperties("agence")
 	private Collection<Employe> employes;
 
 	public Agence() {
+	}
+
+	public Agence(int id) {
+		this.id=id;
 	}
 
 	public void setId(int id) {

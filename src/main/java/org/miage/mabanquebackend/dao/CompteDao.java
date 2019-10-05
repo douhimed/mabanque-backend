@@ -11,7 +11,6 @@ import org.springframework.stereotype.Repository;
 public interface CompteDao extends JpaRepository<Compte, Integer> {
 
 	List<Compte> findAllByClient(Client client);
-	List<Compte> findAllByClient(int clientId);
 
 
 }

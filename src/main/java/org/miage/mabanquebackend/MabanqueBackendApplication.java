@@ -16,6 +16,9 @@ import org.miage.mabanquebackend.web.models.CompteEpargne;
 import org.miage.mabanquebackend.web.models.Conseiller;
 import org.miage.mabanquebackend.web.models.Employe;
 import org.miage.mabanquebackend.web.models.Gerant;
+import org.miage.mabanquebackend.web.models.Operation;
+import org.miage.mabanquebackend.web.models.Retrait;
+import org.miage.mabanquebackend.web.models.Versement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -70,37 +73,46 @@ public class MabanqueBackendApplication implements CommandLineRunner {
 
 		List<Employe> employes = Arrays.asList(e1, e2, e3, e4, e5, g1, g2);
 		employes.forEach(e -> employeDao.save(e));
+		
+		
 
 		Client client1 = new Client("Douhi", "Med", "douhi@gmail.com", "BV El ounia N27", "oujda", "0677232344", 60012);
 		client1.setConseiller(e1);
-		Compte c1 = new CompteCourant(15000, 1500);
-		c1.setClient(client1);
-		Compte c2 = new CompteEpargne(25000, 3);
-		c2.setClient(client1);
-		List<Compte> comptes1 = Arrays.asList(c1, c2);
-		client1.setComptes(comptes1);
 		clientDao.save(client1);
-
-		Client client2 = new Client("Riahi", "Azzedine", "riahi@gmail.com", "BV Ouartassi N47", "oujda", "0677232154",
-				60012);
+		Client client2 = new Client("Riahi", "Azzedine", "riahi@gmail.com", "BV Ouartassi N47", "oujda", "0677232154", 60012);
 		client2.setConseiller(e1);
-		Compte c3 = new CompteCourant(250000, 3000);
-		c3.setClient(client2);
-		List<Compte> comptes2 = Arrays.asList(c3);
-		client2.setComptes(comptes2);
 		clientDao.save(client2);
-
 		Client client3 = new Client("Douhi", "Khadija", "khadija@gmail.com", "CGI N45", "oujda", "0673232344", 60060);
 		client3.setConseiller(e3);
+		clientDao.save(client3);
+		
+		
+		Compte c1 = new CompteCourant(15000, 1500);
+		c1.setClient(client1);
+		compteDao.save(c1);
+		Compte c2 = new CompteEpargne(25000, 3);
+		c2.setClient(client1);
+		compteDao.save(c2);
+		Compte c3 = new CompteCourant(250000, 3000);
+		c3.setClient(client2);
+		compteDao.save(c3);
 		Compte c4 = new CompteEpargne(75000, 4.5);
 		c4.setClient(client3);
-		List<Compte> comptes3 = Arrays.asList(c4);
-		client3.setComptes(comptes3);
-		clientDao.save(client3);
-
-		List<Client> clients1 = Arrays.asList(client1, client2);
-		List<Client> clients2 = Arrays.asList(client3);
-
+		compteDao.save(c4);
+		
+		
+		Operation o1 = new Versement(1500, c1);
+		this.operationDao.save(o1);
+		Operation o2 = new Retrait(3500, c1);
+		this.operationDao.save(o2);
+		Operation o3 = new Versement(400, c1);
+		this.operationDao.save(o3);
+		Operation o4 = new Versement(1500, c2);
+		this.operationDao.save(o4);
+		Operation o5 = new Retrait(2500, c2);
+		this.operationDao.save(o5);
+		Operation o6 = new Versement(5500, c3);
+		this.operationDao.save(o6);
 	}
 
 }

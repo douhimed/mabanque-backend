@@ -22,7 +22,7 @@ public class Client {
 	private int id;
 	private String nom, prenom, email, adresse, ville, tel;
 	private int codePostal;
-	@OneToMany(mappedBy = "client", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "client", fetch = FetchType.LAZY)
 	@JsonIgnoreProperties("client")
 	private Collection<Compte> comptes;
 	@ManyToOne

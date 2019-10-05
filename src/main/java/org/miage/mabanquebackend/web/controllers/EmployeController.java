@@ -1,11 +1,12 @@
 package org.miage.mabanquebackend.web.controllers;
 
 import java.net.URI;
-import java.util.List;
 
 import org.miage.mabanquebackend.services.IConseillerServices;
+import org.miage.mabanquebackend.services.IGerantServices;
 import org.miage.mabanquebackend.web.models.Client;
-import org.miage.mabanquebackend.web.models.Conseiller;
+import org.miage.mabanquebackend.web.models.Employe;
+import org.miage.mabanquebackend.web.models.tdo.TDOEmploye;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,49 +23,39 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @RestController
-@CrossOrigin(origins="*")
-@RequestMapping("/clients")
-public class ClientController {
+@CrossOrigin(origins = "*")
+@RequestMapping("/employes")
+public class EmployeController {
+
+	@Autowired
+	private IGerantServices gerantServices;
 
 	@Autowired
 	private IConseillerServices conseillerServices;
 
-	
 	@GetMapping("/{id}")
-	public Client get(@PathVariable int id) {
-		return this.conseillerServices.getClients(id);
+	public Employe get(@PathVariable int id) {
+		return this.conseillerServices.getConseiller(id);
 	}
-	
+
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> delete(@PathVariable int id) {
-		this.conseillerServices.deleteClient(id);
+		this.gerantServices.deleteEmploye(id);
 		return ResponseEntity.noContent().build();
 	}
 	
-	/*
-	@GetMapping
-	public List<Client> getByConseiller(@RequestHeader(name = "id-conseiller") int idConseiller) {
-		return this.conseillerServices.getClientsByConseiller(new Conseiller(idConseiller));
-	}
-	
-	@GetMapping("/{id}")
-	public Client get(@PathVariable int id) {
-		return this.conseillerServices.getClients(id);
-	}
-	
 	@PutMapping
-	public ResponseEntity<Client> update(@RequestBody Client client) {
-		Client updatedClient = this.conseillerServices.updateClient(client);
-		return new ResponseEntity<Client>(updatedClient, HttpStatus.OK);
+	public ResponseEntity<Employe> update(@RequestBody TDOEmploye tdoEmp) {
+		Employe employe = this.conseillerServices.updateEmploye(tdoEmp);
+		return new ResponseEntity<Employe>(employe, HttpStatus.OK);
 	}
-
+	
 	@PostMapping
-	public ResponseEntity<Void> addClient(@RequestBody Client client) {
-		Client createdClient = this.conseillerServices.addClient(client);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{idClient}").buildAndExpand(createdClient.getId())
+	public ResponseEntity<Void> addEmploye(@RequestBody TDOEmploye tdoEmp, @RequestHeader(name="id-user") int idUser) {
+		Employe employe = this.gerantServices.addEmploye(tdoEmp, idUser);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(employe.getId())
 				.toUri();
 		return ResponseEntity.created(uri).build();
 	}
 
-	*/
 }
