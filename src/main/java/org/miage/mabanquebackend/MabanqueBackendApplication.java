@@ -48,7 +48,7 @@ public class MabanqueBackendApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-
+/*
 		Agence a1 = new Agence();
 		Agence a2 = new Agence();
 
@@ -109,10 +109,24 @@ public class MabanqueBackendApplication implements CommandLineRunner {
 		this.operationDao.save(o3);
 		Operation o4 = new Versement(1500, c2);
 		this.operationDao.save(o4);
-		Operation o5 = new Retrait(2500, c2);
+		Operation o5 = new Retrait(2500, c4);
 		this.operationDao.save(o5);
 		Operation o6 = new Versement(5500, c3);
 		this.operationDao.save(o6);
+		
+		Operation o7 = new Versement(2000, c1);
+		this.operationDao.save(o7);
+		Operation o8 = new Retrait(2300, c1);
+		this.operationDao.save(o8);
+		Operation o9 = new Versement(900, c4);
+		this.operationDao.save(o9);
+		Operation o10 = new Versement(1100, c2);
+		this.operationDao.save(o10);
+		Operation o11 = new Retrait(2900, c2);
+		this.operationDao.save(o11);
+		Operation o12 = new Versement(500, c4);
+		this.operationDao.save(o12);
+		*/
 	}
 
 }

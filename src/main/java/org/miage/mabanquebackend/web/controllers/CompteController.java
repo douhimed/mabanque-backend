@@ -1,23 +1,19 @@
 package org.miage.mabanquebackend.web.controllers;
 
-import java.net.URI;
-
 import org.miage.mabanquebackend.services.IConseillerServices;
+import org.miage.mabanquebackend.web.models.Client;
 import org.miage.mabanquebackend.web.models.Compte;
-import org.miage.mabanquebackend.web.models.CompteCourant;
+import org.miage.mabanquebackend.web.models.tdo.TDOClient;
+import org.miage.mabanquebackend.web.models.tdo.TDOCompte;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @RestController
 @CrossOrigin(origins="*")
@@ -30,6 +26,12 @@ public class CompteController {
 	@GetMapping("/{id}")
 	public Compte get(@PathVariable int id) {
 		return this.conseillerServices.getCompte(id);
+	}
+	
+	
+	@PostMapping
+	public Compte addCompte(@RequestBody TDOCompte tdoCompte) {
+		return this.conseillerServices.addCompte(tdoCompte.buildCompte(), tdoCompte.getClientId());
 	}
 	
 	

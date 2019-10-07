@@ -1,5 +1,6 @@
 package org.miage.mabanquebackend.web.models;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
@@ -41,9 +42,11 @@ public abstract class Compte {
 	private Collection<Operation> operations;
 
 	public Compte() {
+		operations = new ArrayList<Operation>();
 	}
 
 	public Compte(double solde) {
+		this();
 		this.solde = solde;
 	}
 

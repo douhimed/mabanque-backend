@@ -22,4 +22,8 @@ public interface IConseillerServices {
 
 	Compte getCompte(int id);
 
+	Client addClient(Client client, int conseillerID);
+
+	Compte addCompte(Compte compte, int idClient);
+
 }

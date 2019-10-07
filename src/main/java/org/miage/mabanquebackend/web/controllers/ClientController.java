@@ -6,6 +6,7 @@ import java.util.List;
 import org.miage.mabanquebackend.services.IConseillerServices;
 import org.miage.mabanquebackend.web.models.Client;
 import org.miage.mabanquebackend.web.models.Conseiller;
+import org.miage.mabanquebackend.web.models.tdo.TDOClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,49 +23,49 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @RestController
-@CrossOrigin(origins="*")
+@CrossOrigin(origins = "*")
 @RequestMapping("/clients")
 public class ClientController {
 
 	@Autowired
 	private IConseillerServices conseillerServices;
 
-	
 	@GetMapping("/{id}")
 	public Client get(@PathVariable int id) {
 		return this.conseillerServices.getClients(id);
 	}
-	
+
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> delete(@PathVariable int id) {
 		this.conseillerServices.deleteClient(id);
 		return ResponseEntity.noContent().build();
 	}
-	
-	/*
-	@GetMapping
-	public List<Client> getByConseiller(@RequestHeader(name = "id-conseiller") int idConseiller) {
-		return this.conseillerServices.getClientsByConseiller(new Conseiller(idConseiller));
-	}
-	
-	@GetMapping("/{id}")
-	public Client get(@PathVariable int id) {
-		return this.conseillerServices.getClients(id);
-	}
-	
-	@PutMapping
-	public ResponseEntity<Client> update(@RequestBody Client client) {
-		Client updatedClient = this.conseillerServices.updateClient(client);
-		return new ResponseEntity<Client>(updatedClient, HttpStatus.OK);
-	}
 
 	@PostMapping
-	public ResponseEntity<Void> addClient(@RequestBody Client client) {
-		Client createdClient = this.conseillerServices.addClient(client);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{idClient}").buildAndExpand(createdClient.getId())
-				.toUri();
-		return ResponseEntity.created(uri).build();
+	public Client addClient(@RequestBody TDOClient tdoClient) {
+		return this.conseillerServices.addClient(tdoClient.buildClient(), tdoClient.getConseillerID());
+
 	}
 
-	*/
+	/*
+	 * @GetMapping public List<Client> getByConseiller(@RequestHeader(name =
+	 * "id-conseiller") int idConseiller) { return
+	 * this.conseillerServices.getClientsByConseiller(new Conseiller(idConseiller));
+	 * }
+	 * 
+	 * @GetMapping("/{id}") public Client get(@PathVariable int id) { return
+	 * this.conseillerServices.getClients(id); }
+	 * 
+	 * @PutMapping public ResponseEntity<Client> update(@RequestBody Client client)
+	 * { Client updatedClient = this.conseillerServices.updateClient(client); return
+	 * new ResponseEntity<Client>(updatedClient, HttpStatus.OK); }
+	 * 
+	 * @PostMapping public ResponseEntity<Void> addClient(@RequestBody Client
+	 * client) { Client createdClient = this.conseillerServices.addClient(client);
+	 * URI uri =
+	 * ServletUriComponentsBuilder.fromCurrentRequest().path("/{idClient}").
+	 * buildAndExpand(createdClient.getId()) .toUri(); return
+	 * ResponseEntity.created(uri).build(); }
+	 * 
+	 */
 }

@@ -69,5 +69,17 @@ public class ConseillerServices implements IConseillerServices {
 		return this.compteDao.findById(id).get();
 	}
 
+	@Override
+	public Client addClient(Client client, int conseillerID) {
+		client.setConseiller(this.getConseiller(conseillerID));
+		return this.clientDao.save(client);
+	}
+
+	@Override
+	public Compte addCompte(Compte compte, int idClient) {
+		compte.setClient(this.getClients(idClient));
+		return this.compteDao.save(compte);
+	}
+
 
 }

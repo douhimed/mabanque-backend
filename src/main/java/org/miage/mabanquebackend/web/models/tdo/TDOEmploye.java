@@ -60,17 +60,15 @@ public class TDOEmploye {
 	}
 
 	public Employe buildConseiller() {
-		Employe emp = new Conseiller();
-		if (this.id != 0)
-			emp.setId(this.id);
-		emp.setNom(this.nom);
-		emp.setPrenom(this.prenom);
-		emp.setPassword(this.nom.substring(0, 3) + this.prenom.substring(0, 3));
+		String pass = this.nom.substring(0, 3) + this.prenom.substring(0, 3);
 		if (this.password != null && this.password.trim().length() >= 6)
-			emp.setPassword(this.password);
-		emp.setLogin(emp.getPassword());
+			pass =this.password;
+		String login = pass;
 		if (this.login != null && this.login.trim().length() >= 6)
-			emp.setLogin(this.login);
+			login = this.login;
+		Employe emp = new Conseiller(this.nom, this.prenom, login, pass);
+		if (this.id != 0)
+			emp.setId(this.id);		
 		return emp;
 	}
 
