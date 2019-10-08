@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
@@ -37,7 +38,7 @@ public abstract class Compte {
 	@JoinColumn(name = "CODE_CLIENT")
 	@JsonIgnoreProperties("comptes")
 	private Client client;
-	@OneToMany(mappedBy = "compte", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "compte", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
 	@JsonIgnoreProperties("compte")
 	private Collection<Operation> operations;
 

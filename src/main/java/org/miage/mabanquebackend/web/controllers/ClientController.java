@@ -35,8 +35,8 @@ public class ClientController {
 		return this.conseillerServices.getClients(id);
 	}
 
-	@DeleteMapping("/{id}")
-	public ResponseEntity<Void> delete(@PathVariable int id) {
+	@DeleteMapping
+	public ResponseEntity<Void> delete(@RequestHeader(name = "id-client") int id) {
 		this.conseillerServices.deleteClient(id);
 		return ResponseEntity.noContent().build();
 	}
@@ -44,6 +44,11 @@ public class ClientController {
 	@PostMapping
 	public Client addClient(@RequestBody TDOClient tdoClient) {
 		return this.conseillerServices.addClient(tdoClient.buildClient(), tdoClient.getConseillerID());
+	}
+
+	@PutMapping
+	public Client update(@RequestBody TDOClient tdoClient) {
+		return this.conseillerServices.updateClient(tdoClient.buildClient(), tdoClient.getConseillerID());
 
 	}
 
