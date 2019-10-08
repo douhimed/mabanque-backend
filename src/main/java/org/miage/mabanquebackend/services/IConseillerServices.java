@@ -24,4 +24,6 @@ public interface IConseillerServices {
 
 	Client updateClient(Client client, int conseillerID);
 
+	void deleteCompte(int id);
+
 }

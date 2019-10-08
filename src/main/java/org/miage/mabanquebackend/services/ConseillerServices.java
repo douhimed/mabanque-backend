@@ -87,5 +87,10 @@ public class ConseillerServices implements IConseillerServices {
 		return this.clientDao.save(client);
 	}
 
+	@Override
+	public void deleteCompte(int id) {
+		this.compteDao.deleteById(id);		
+	}
+
 
 }
