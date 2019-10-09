@@ -4,7 +4,8 @@ package org.miage.mabanquebackend.services;
 import org.miage.mabanquebackend.web.models.Client;
 import org.miage.mabanquebackend.web.models.Compte;
 import org.miage.mabanquebackend.web.models.Employe;
-import org.miage.mabanquebackend.web.models.tdo.TDOEmploye;
+import org.miage.mabanquebackend.web.models.tdo.DTOEmploye;
+import org.miage.mabanquebackend.web.models.tdo.DTOOperation;
 
 public interface IConseillerServices {
 
@@ -12,7 +13,7 @@ public interface IConseillerServices {
 
 	void deleteClient(int id);
 
-	Employe updateEmploye(TDOEmploye tdoEmp);
+	Employe updateEmploye(DTOEmploye tdoEmp);
 
 	Client getClients(int id);
 
@@ -25,5 +26,7 @@ public interface IConseillerServices {
 	Client updateClient(Client client, int conseillerID);
 
 	void deleteCompte(int id);
+
+	Compte addOperation(DTOOperation dtoOperation);
 
 }

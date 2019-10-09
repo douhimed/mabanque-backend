@@ -17,8 +17,8 @@ import javax.persistence.ManyToOne;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="TYPE_OPERATION",discriminatorType=DiscriminatorType.STRING,length=1)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "TYPE_OPERATION", discriminatorType = DiscriminatorType.STRING, length = 1)
 public abstract class Operation {
 
 	@Id
@@ -27,13 +27,18 @@ public abstract class Operation {
 	private Date dateOperation = new Date();
 	private double montant;
 	@ManyToOne
-	@JoinColumn(name="NUM_COMPTE")
+	@JoinColumn(name = "NUM_COMPTE")
 	@JsonIgnoreProperties("operations")
 	private Compte compte;
 	protected String type;
 
 	public Operation() {
 		this.setType();
+	}
+
+	public Operation(double montant) {
+		this();
+		this.montant = montant;
 	}
 
 	public Operation(double montant, Compte compte) {
@@ -80,13 +85,11 @@ public abstract class Operation {
 	public void setCompte(Compte compte) {
 		this.compte = compte;
 	}
-	
-	
+
 	public String getType() {
 		return type;
 	}
-	
-	public abstract void setType();
 
+	public abstract void setType();
 
 }

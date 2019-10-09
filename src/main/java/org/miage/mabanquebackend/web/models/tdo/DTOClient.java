@@ -3,12 +3,12 @@ package org.miage.mabanquebackend.web.models.tdo;
 import org.miage.mabanquebackend.web.models.Client;
 import org.miage.mabanquebackend.web.models.Conseiller;
 
-public class TDOClient {
+public class DTOClient {
 
 	private int id, codePostal, conseillerID;
 	private String nom, prenom, email,tel, ville, adresse;
 	
-	public TDOClient() {
+	public DTOClient() {
 		super();
 	}
 

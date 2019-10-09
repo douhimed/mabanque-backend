@@ -5,15 +5,15 @@ import java.util.ArrayList;
 import org.miage.mabanquebackend.web.models.Conseiller;
 import org.miage.mabanquebackend.web.models.Employe;
 
-public class TDOEmploye {
+public class DTOEmploye {
 
 	private int id;
 	private String nom, prenom, password, login;
 
-	public TDOEmploye() {
+	public DTOEmploye() {
 	}
 
-	public TDOEmploye(String nom, String prenom) {
+	public DTOEmploye(String nom, String prenom) {
 		super();
 		this.nom = nom;
 		this.prenom = prenom;

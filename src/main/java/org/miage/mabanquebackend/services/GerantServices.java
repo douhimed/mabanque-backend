@@ -9,7 +9,7 @@ import org.miage.mabanquebackend.web.models.Agence;
 import org.miage.mabanquebackend.web.models.Client;
 import org.miage.mabanquebackend.web.models.Employe;
 import org.miage.mabanquebackend.web.models.Gerant;
-import org.miage.mabanquebackend.web.models.tdo.TDOEmploye;
+import org.miage.mabanquebackend.web.models.tdo.DTOEmploye;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -45,7 +45,7 @@ public class GerantServices implements IGerantServices {
 
 
 	@Override
-	public Employe addEmploye(TDOEmploye tdoEmp, int idGerant) {
+	public Employe addEmploye(DTOEmploye tdoEmp, int idGerant) {
 		Employe employe = tdoEmp.buildConseiller();
 		employe.setAgence(getAgenceByGerant(idGerant));
 		return this.employeDao.save(employe);

@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.miage.mabanquebackend.web.models.Agence;
 import org.miage.mabanquebackend.web.models.Employe;
-import org.miage.mabanquebackend.web.models.tdo.TDOEmploye;
+import org.miage.mabanquebackend.web.models.tdo.DTOEmploye;
 
 public interface IGerantServices{
 
@@ -14,6 +14,6 @@ public interface IGerantServices{
 
 	void deleteEmploye(int id);
 
-	Employe addEmploye(TDOEmploye tdoEmp, int idGerant);
+	Employe addEmploye(DTOEmploye tdoEmp, int idGerant);
 	
 }

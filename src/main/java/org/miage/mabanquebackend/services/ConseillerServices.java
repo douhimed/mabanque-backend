@@ -11,10 +11,14 @@ import org.miage.mabanquebackend.dao.OperationDao;
 import org.miage.mabanquebackend.web.models.Agence;
 import org.miage.mabanquebackend.web.models.Client;
 import org.miage.mabanquebackend.web.models.Compte;
+import org.miage.mabanquebackend.web.models.CompteCourant;
 import org.miage.mabanquebackend.web.models.Conseiller;
 import org.miage.mabanquebackend.web.models.Employe;
 import org.miage.mabanquebackend.web.models.Operation;
-import org.miage.mabanquebackend.web.models.tdo.TDOEmploye;
+import org.miage.mabanquebackend.web.models.Retrait;
+import org.miage.mabanquebackend.web.models.Versement;
+import org.miage.mabanquebackend.web.models.tdo.DTOEmploye;
+import org.miage.mabanquebackend.web.models.tdo.DTOOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -48,7 +52,7 @@ public class ConseillerServices implements IConseillerServices {
 	}
 
 	@Override
-	public Employe updateEmploye(TDOEmploye tdoEmp) {
+	public Employe updateEmploye(DTOEmploye tdoEmp) {
 		Employe employe = tdoEmp.buildConseiller();
 		employe.setAgence(getAgenceByConseiller(employe.getId()));
 		return this.employeDao.save(employe);
@@ -92,5 +96,43 @@ public class ConseillerServices implements IConseillerServices {
 		this.compteDao.deleteById(id);		
 	}
 
+	public Compte addOperation(DTOOperation dtoOperation) {
+		if(dtoOperation.getType().equals("verser"))
+			return this.verser(dtoOperation.getCompteOne(), dtoOperation.getMontant());
+		else if(dtoOperation.getType().equals("retirait"))
+			return this.retirer(dtoOperation.getCompteOne(), dtoOperation.getMontant());
+		else if(dtoOperation.getType().equals("verment"))
+			return this.virment(dtoOperation.getCompteOne(), dtoOperation.getCompteTwo(), dtoOperation.getMontant());
+		return this.getCompte(dtoOperation.getCompteOne());
+	}
 
+	public Compte verser(int id, double montant) {
+		Compte compte = this.getCompte(id);
+		Versement versment = new Versement(montant, compte);
+		this.operationdao.save(versment);
+		compte.setSolde(compte.getSolde() + montant);
+		return this.compteDao.save(compte);
+	}
+
+	public Compte retirer(int id, double montant) {
+		Compte compte = this.getCompte(id);
+		double facilitiesCaisse = 0;
+		if(compte instanceof CompteCourant)
+			facilitiesCaisse = ((CompteCourant) compte).getDecouvert();
+		if(compte.getSolde()+facilitiesCaisse<montant)
+			throw new RuntimeException("solde insuffisant");
+		Retrait retrait = new Retrait(montant, compte);
+		this.operationdao.save(retrait);
+		compte.setSolde(compte.getSolde() - montant);
+		return this.compteDao.save(compte);		
+	}
+	
+	public Compte virment(int compteOne, int compteTwo, double montant) {
+		if(compteOne == compteTwo)
+			throw new RuntimeException("Interdit sur le meme compte");
+		retirer(compteOne, montant);
+		return verser(compteTwo, montant);
+	}
+	
+	
 }

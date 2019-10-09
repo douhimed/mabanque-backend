@@ -13,6 +13,10 @@ public class Retrait extends Operation {
 		super();
 	}
 
+	public Retrait(double montant) {
+		super(montant);
+	}
+
 	public Retrait(double montant, Compte compte) {
 		super(montant, compte);
 	}

@@ -6,7 +6,7 @@ import org.miage.mabanquebackend.services.IConseillerServices;
 import org.miage.mabanquebackend.services.IGerantServices;
 import org.miage.mabanquebackend.web.models.Client;
 import org.miage.mabanquebackend.web.models.Employe;
-import org.miage.mabanquebackend.web.models.tdo.TDOEmploye;
+import org.miage.mabanquebackend.web.models.tdo.DTOEmploye;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -45,13 +45,13 @@ public class EmployeController {
 	}
 	
 	@PutMapping
-	public ResponseEntity<Employe> update(@RequestBody TDOEmploye tdoEmp) {
+	public ResponseEntity<Employe> update(@RequestBody DTOEmploye tdoEmp) {
 		Employe employe = this.conseillerServices.updateEmploye(tdoEmp);
 		return new ResponseEntity<Employe>(employe, HttpStatus.OK);
 	}
 	
 	@PostMapping
-	public ResponseEntity<Void> addEmploye(@RequestBody TDOEmploye tdoEmp, @RequestHeader(name="id-user") int idUser) {
+	public ResponseEntity<Void> addEmploye(@RequestBody DTOEmploye tdoEmp, @RequestHeader(name="id-user") int idUser) {
 		Employe employe = this.gerantServices.addEmploye(tdoEmp, idUser);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(employe.getId())
 				.toUri();

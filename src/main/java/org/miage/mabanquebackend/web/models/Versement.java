@@ -13,6 +13,10 @@ public class Versement extends Operation {
 		super();
 	}
 
+	public Versement(double montant) {
+		super(montant);
+	}
+
 	public Versement(double montant, Compte compte) {
 		super(montant, compte);
 	}
@@ -20,7 +24,7 @@ public class Versement extends Operation {
 	public Versement(int id, Date dateOperation, double montant, Compte compte) {
 		super(id, dateOperation, montant, compte);
 	}
-	
+
 	@Override
 	public void setType() {
 		this.type = "Verment";

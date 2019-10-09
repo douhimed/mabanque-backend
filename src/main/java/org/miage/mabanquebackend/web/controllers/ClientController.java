@@ -6,7 +6,7 @@ import java.util.List;
 import org.miage.mabanquebackend.services.IConseillerServices;
 import org.miage.mabanquebackend.web.models.Client;
 import org.miage.mabanquebackend.web.models.Conseiller;
-import org.miage.mabanquebackend.web.models.tdo.TDOClient;
+import org.miage.mabanquebackend.web.models.tdo.DTOClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -42,12 +42,12 @@ public class ClientController {
 	}
 
 	@PostMapping
-	public Client addClient(@RequestBody TDOClient tdoClient) {
+	public Client addClient(@RequestBody DTOClient tdoClient) {
 		return this.conseillerServices.addClient(tdoClient.buildClient(), tdoClient.getConseillerID());
 	}
 
 	@PutMapping
-	public Client update(@RequestBody TDOClient tdoClient) {
+	public Client update(@RequestBody DTOClient tdoClient) {
 		return this.conseillerServices.updateClient(tdoClient.buildClient(), tdoClient.getConseillerID());
 
 	}

@@ -4,13 +4,13 @@ import org.miage.mabanquebackend.web.models.Compte;
 import org.miage.mabanquebackend.web.models.CompteCourant;
 import org.miage.mabanquebackend.web.models.CompteEpargne;
 
-public class TDOCompte {
+public class DTOCompte {
 
 	private int id, clientId;
 	private double solde, taux, decouvert;
 	private String type;
 
-	public TDOCompte() {
+	public DTOCompte() {
 	}
 
 	public int getId() {

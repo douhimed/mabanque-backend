@@ -2,7 +2,7 @@ package org.miage.mabanquebackend.web.controllers;
 
 import org.miage.mabanquebackend.services.IConseillerServices;
 import org.miage.mabanquebackend.web.models.Compte;
-import org.miage.mabanquebackend.web.models.tdo.TDOCompte;
+import org.miage.mabanquebackend.web.models.tdo.DTOCompte;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -29,9 +29,8 @@ public class CompteController {
 	
 	
 	@PostMapping
-	public Compte addCompte(@RequestBody TDOCompte tdoCompte) {
+	public Compte addCompte(@RequestBody DTOCompte tdoCompte) {
 		Compte compte = tdoCompte.buildCompte();
-		System.out.println(compte);
 		return this.conseillerServices.addCompte(compte, tdoCompte.getClientId());
 	}
 	
