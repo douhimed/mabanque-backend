@@ -23,19 +23,16 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @RestController
-@CrossOrigin(origins = "*")
 @RequestMapping("/employes")
 public class EmployeController {
 
 	@Autowired
 	private IGerantServices gerantServices;
 
-	@Autowired
-	private IConseillerServices conseillerServices;
 
 	@GetMapping("/{id}")
 	public Employe get(@PathVariable int id) {
-		return this.conseillerServices.getConseiller(id);
+		return this.gerantServices.getConseiller(id);
 	}
 
 	@DeleteMapping("/{id}")
@@ -46,7 +43,7 @@ public class EmployeController {
 	
 	@PutMapping
 	public ResponseEntity<Employe> update(@RequestBody DTOEmploye tdoEmp) {
-		Employe employe = this.conseillerServices.updateEmploye(tdoEmp);
+		Employe employe = this.gerantServices.updateEmploye(tdoEmp);
 		return new ResponseEntity<Employe>(employe, HttpStatus.OK);
 	}
 	

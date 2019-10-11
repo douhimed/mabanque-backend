@@ -2,11 +2,13 @@ package org.miage.mabanquebackend.web.controllers;
 
 import org.miage.mabanquebackend.security.JwtTokenUtil;
 import org.miage.mabanquebackend.services.IConseillerServices;
+import org.miage.mabanquebackend.services.IGerantServices;
 import org.miage.mabanquebackend.services.jwt.JwtUserDetailsService;
 import org.miage.mabanquebackend.web.models.jwt.JwtRequest;
 import org.miage.mabanquebackend.web.models.jwt.JwtResponse;
 import org.miage.mabanquebackend.web.models.tdo.DTOUser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -35,7 +37,7 @@ public class AuthController {
 	private JwtUserDetailsService userDetailsService;
 	
 	@Autowired
-	private IConseillerServices conseillerController;
+	private IGerantServices gerantServicess;
 
 	@PostMapping
 	public ResponseEntity<JwtResponse> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
@@ -47,15 +49,9 @@ public class AuthController {
 
 		final String token = jwtTokenUtil.generateToken(userDetails);
 
-		return ResponseEntity.ok(new JwtResponse(token, this.conseillerController.getUser(userDetails.getUsername())));
+		return ResponseEntity.ok(new JwtResponse(token, this.gerantServicess.getUser(userDetails.getUsername())));
 	}
 	
-	/*
-	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public ResponseEntity<?> saveUser(@RequestBody DTOUser user) throws Exception {
-		return ResponseEntity.ok(userDetailsService.save(user));
-	}*/
-
 	private void authenticate(String username, String password) throws Exception {
 		try {
 			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));

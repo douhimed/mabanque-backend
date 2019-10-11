@@ -8,7 +8,6 @@ import org.miage.mabanquebackend.dao.ClientDao;
 import org.miage.mabanquebackend.dao.CompteDao;
 import org.miage.mabanquebackend.dao.EmployeDao;
 import org.miage.mabanquebackend.dao.OperationDao;
-import org.miage.mabanquebackend.dao.RoleDao;
 import org.miage.mabanquebackend.web.models.Agence;
 import org.miage.mabanquebackend.web.models.Client;
 import org.miage.mabanquebackend.web.models.Compte;
@@ -19,7 +18,6 @@ import org.miage.mabanquebackend.web.models.Employe;
 import org.miage.mabanquebackend.web.models.Gerant;
 import org.miage.mabanquebackend.web.models.Operation;
 import org.miage.mabanquebackend.web.models.Retrait;
-import org.miage.mabanquebackend.web.models.Role;
 import org.miage.mabanquebackend.web.models.Versement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -45,8 +43,6 @@ public class MabanqueBackendApplication implements CommandLineRunner {
 	@Autowired
 	private EmployeDao employeDao;
 	
-	@Autowired
-	private RoleDao roleDao;
 
 	@Autowired
 	private PasswordEncoder bcryptEncoder;
@@ -58,8 +54,6 @@ public class MabanqueBackendApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		/*
-		Role r1 = new Role("gerant");		
-		Role r2 = new Role("conseiller");
 		
 		Agence a1 = new Agence();
 		Agence a2 = new Agence();
@@ -84,19 +78,6 @@ public class MabanqueBackendApplication implements CommandLineRunner {
 		agenceDao.save(a2);
 
 		List<Employe> employes = Arrays.asList(e1, e2, e3, e4, e5, g1, g2);
-		employes.forEach(e -> employeDao.save(e));
-		
-		roleDao.save(r1);
-		roleDao.save(r2);
-		
-		e2.addRole(r2);
-		e1.addRole(r2);
-		e5.addRole(r2);
-		e4.addRole(r2);
-		e3.setAgence(a1);
-		g2.addRole(r1);
-		g1.addRole(r1);
-
 		employes.forEach(e -> employeDao.save(e));
 		
 		Client client1 = new Client("Douhi", "Med", "douhi@gmail.com", "BV El ounia N27", "oujda", "0677232344", 60012);

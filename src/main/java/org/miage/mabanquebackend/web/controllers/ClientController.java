@@ -52,25 +52,4 @@ public class ClientController {
 
 	}
 
-	/*
-	 * @GetMapping public List<Client> getByConseiller(@RequestHeader(name =
-	 * "id-conseiller") int idConseiller) { return
-	 * this.conseillerServices.getClientsByConseiller(new Conseiller(idConseiller));
-	 * }
-	 * 
-	 * @GetMapping("/{id}") public Client get(@PathVariable int id) { return
-	 * this.conseillerServices.getClients(id); }
-	 * 
-	 * @PutMapping public ResponseEntity<Client> update(@RequestBody Client client)
-	 * { Client updatedClient = this.conseillerServices.updateClient(client); return
-	 * new ResponseEntity<Client>(updatedClient, HttpStatus.OK); }
-	 * 
-	 * @PostMapping public ResponseEntity<Void> addClient(@RequestBody Client
-	 * client) { Client createdClient = this.conseillerServices.addClient(client);
-	 * URI uri =
-	 * ServletUriComponentsBuilder.fromCurrentRequest().path("/{idClient}").
-	 * buildAndExpand(createdClient.getId()) .toUri(); return
-	 * ResponseEntity.created(uri).build(); }
-	 * 
-	 */
 }

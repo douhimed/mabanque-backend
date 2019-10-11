@@ -10,9 +10,6 @@ public class DTOEmploye {
 
 	private int id;
 	private String nom, prenom, password, username;
-    
-	@Autowired
-	private PasswordEncoder bcryptEncoder;
 
 	public DTOEmploye() {
 	}
@@ -70,7 +67,7 @@ public class DTOEmploye {
 		String username = pass;
 		if (this.username != null && this.username.trim().length() >= 6)
 			username = this.username;
-		Employe emp = new Conseiller(this.nom, this.prenom, username, bcryptEncoder.encode(pass));
+		Employe emp = new Conseiller(this.nom, this.prenom, username, new BCryptPasswordEncoder().encode(pass));
 		if (this.id != 0)
 			emp.setId(this.id);		
 		return emp;

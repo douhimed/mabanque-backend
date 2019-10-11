@@ -41,26 +41,4 @@ public class CompteController {
 		return ResponseEntity.noContent().build();
 	}
 	
-	/*
-	@GetMapping("/{id}")
-	public Compte get(@PathVariable int id) {
-		return this.conseillerServices.getCompte(id);
-	}
-	
-	@PutMapping
-	public ResponseEntity<Compte> update(@RequestBody Compte compte) {
-		System.out.println(compte);
-		Compte updatedCompte = this.conseillerServices.updateCompte(compte);
-		return new ResponseEntity<Compte>(updatedCompte, HttpStatus.OK);
-	}
-	
-	@PostMapping
-	public ResponseEntity<Void> add(@RequestBody Compte compte) {
-		Compte createdCompte = this.conseillerServices.addCompte(compte);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(createdCompte.getId())
-				.toUri();
-		return ResponseEntity.created(uri).build();
-	}
-*/
-	
 }

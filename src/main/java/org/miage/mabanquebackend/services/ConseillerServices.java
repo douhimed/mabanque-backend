@@ -39,29 +39,7 @@ public class ConseillerServices implements IConseillerServices {
 	@Autowired
 	private CompteDao compteDao;
 
-	
-	@Override
-	public Employe getConseiller(int id) {
-		return this.employeDao.findById(id).get();
-		
-	}
-
-	@Override
-	public void deleteClient(int id) {
-		this.clientDao.deleteById(id);
-	}
-
-	@Override
-	public Employe updateEmploye(DTOEmploye tdoEmp) {
-		Employe employe = tdoEmp.buildConseiller();
-		employe.setAgence(getAgenceByConseiller(employe.getId()));
-		return this.employeDao.save(employe);
-	}
-
-	private Agence getAgenceByConseiller(int idUser) {
-		Employe gerant = this.employeDao.findById(idUser).get();
-		return gerant.getAgence();
-	}
+	/*** Gestion des Clients ***/
 
 	@Override
 	public Client getClients(int id) {
@@ -69,8 +47,8 @@ public class ConseillerServices implements IConseillerServices {
 	}
 
 	@Override
-	public Compte getCompte(int id) {
-		return this.compteDao.findById(id).get();
+	public void deleteClient(int id) {
+		this.clientDao.deleteById(id);
 	}
 
 	@Override
@@ -80,28 +58,37 @@ public class ConseillerServices implements IConseillerServices {
 	}
 
 	@Override
+	public Client updateClient(Client client, int conseillerID) {
+		client.setConseiller(this.getConseiller(conseillerID));
+		return this.clientDao.save(client);
+	}
+
+	/*** Gestion des comptes ***/
+
+	@Override
+	public Compte getCompte(int id) {
+		return this.compteDao.findById(id).get();
+	}
+
+	@Override
 	public Compte addCompte(Compte compte, int idClient) {
 		compte.setClient(this.getClients(idClient));
 		return this.compteDao.save(compte);
 	}
 
 	@Override
-	public Client updateClient(Client client, int conseillerID) {
-		client.setConseiller(this.getConseiller(conseillerID));
-		return this.clientDao.save(client);
+	public void deleteCompte(int id) {
+		this.compteDao.deleteById(id);
 	}
 
-	@Override
-	public void deleteCompte(int id) {
-		this.compteDao.deleteById(id);		
-	}
+	/*** Gestion des operations ***/
 
 	public Compte addOperation(DTOOperation dtoOperation) {
-		if(dtoOperation.getType().equals("verser"))
+		if (dtoOperation.getType().equals("verser"))
 			return this.verser(dtoOperation.getCompteOne(), dtoOperation.getMontant());
-		else if(dtoOperation.getType().equals("retirait"))
+		else if (dtoOperation.getType().equals("retirait"))
 			return this.retirer(dtoOperation.getCompteOne(), dtoOperation.getMontant());
-		else if(dtoOperation.getType().equals("verment"))
+		else if (dtoOperation.getType().equals("verment"))
 			return this.virment(dtoOperation.getCompteOne(), dtoOperation.getCompteTwo(), dtoOperation.getMontant());
 		return this.getCompte(dtoOperation.getCompteOne());
 	}
@@ -117,27 +104,45 @@ public class ConseillerServices implements IConseillerServices {
 	public Compte retirer(int id, double montant) {
 		Compte compte = this.getCompte(id);
 		double facilitiesCaisse = 0;
-		if(compte instanceof CompteCourant)
+		if (compte instanceof CompteCourant)
 			facilitiesCaisse = ((CompteCourant) compte).getDecouvert();
-		if(compte.getSolde()+facilitiesCaisse<montant)
+		if (compte.getSolde() + facilitiesCaisse < montant)
 			throw new RuntimeException("solde insuffisant");
 		Retrait retrait = new Retrait(montant, compte);
 		this.operationdao.save(retrait);
 		compte.setSolde(compte.getSolde() - montant);
-		return this.compteDao.save(compte);		
+		return this.compteDao.save(compte);
 	}
-	
+
 	public Compte virment(int compteOne, int compteTwo, double montant) {
-		if(compteOne == compteTwo)
+		if (compteOne == compteTwo)
 			throw new RuntimeException("Interdit sur le meme compte");
 		retirer(compteOne, montant);
 		return verser(compteTwo, montant);
+	}
+
+	/*** Gestion des employes ***/
+
+	@Override
+	public Employe getConseiller(int id) {
+		return this.employeDao.findById(id).get();
+	}
+
+	@Override
+	public Employe updateEmploye(DTOEmploye tdoEmp) {
+		Employe employe = tdoEmp.buildConseiller();
+		employe.setAgence(getAgenceByConseiller(employe.getId()));
+		return this.employeDao.save(employe);
 	}
 
 	@Override
 	public Employe getUser(String username) {
 		return this.employeDao.findByUsername(username);
 	}
-	
-	
+
+	private Agence getAgenceByConseiller(int idUser) {
+		Employe gerant = this.employeDao.findById(idUser).get();
+		return gerant.getAgence();
+	}
+
 }

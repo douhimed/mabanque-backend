@@ -6,11 +6,13 @@ import org.miage.mabanquebackend.web.models.Agence;
 import org.miage.mabanquebackend.web.models.Employe;
 import org.miage.mabanquebackend.web.models.tdo.DTOEmploye;
 
-public interface IGerantServices{
+public interface IGerantServices extends IConseillerServices{
 
+	/*** Gestion agence ***/
+	
 	Agence getAgenceByGerant(int idGerant);
-
-	List<Agence> getAllAgences();
+	
+	/*** Gestion des employes ***/
 
 	void deleteEmploye(int id);
 

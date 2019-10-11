@@ -41,10 +41,7 @@ public abstract class Employe {
 	@JoinColumn(name = "CODE_AGENCE")
 	@JsonIgnoreProperties("employes")
 	private Agence agence;
-	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "employe_roles", joinColumns = @JoinColumn(name = "emp_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-	private Set<Role> roles = new HashSet<Role>();
-	
+
 	public Employe() {
 	}
 
@@ -93,7 +90,7 @@ public abstract class Employe {
 	public String getUsername() {
 		return username;
 	}
-	
+
 	public void setUsername(String username) {
 		this.username = username;
 	}
@@ -103,7 +100,7 @@ public abstract class Employe {
 	}
 
 	public void setPassword(String password) {
-		//this.password = new BCryptPasswordEncoder().encode(password);
+		// this.password = new BCryptPasswordEncoder().encode(password);
 		this.password = password;
 	}
 
@@ -115,17 +112,6 @@ public abstract class Employe {
 		this.agence = agence;
 	}
 
-	public Set<Role> getRoles() {
-		return roles;
-	}
-
-	public void setRoles(Set<Role> roles) {
-		this.roles = roles;
-	}
-
 	public abstract void setClients(Collection<Client> clients) throws Exception;
 
-	public void addRole(Role role) {
-        this.roles.add(role);
-    }
 }
