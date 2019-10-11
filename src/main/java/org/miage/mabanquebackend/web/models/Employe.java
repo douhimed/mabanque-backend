@@ -1,7 +1,11 @@
 package org.miage.mabanquebackend.web.models;
 
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
@@ -11,8 +15,15 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -23,12 +34,17 @@ public abstract class Employe {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	private String nom, prenom, login, password;
+	private String nom, prenom, username;
+	@JsonIgnore
+	private String password;
 	@ManyToOne
 	@JoinColumn(name = "CODE_AGENCE")
 	@JsonIgnoreProperties("employes")
 	private Agence agence;
-
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "employe_roles", joinColumns = @JoinColumn(name = "emp_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+	private Set<Role> roles = new HashSet<Role>();
+	
 	public Employe() {
 	}
 
@@ -37,16 +53,16 @@ public abstract class Employe {
 		this.id = id;
 	}
 
-	public Employe(String nom, String prenom, String login, String password) {
+	public Employe(String nom, String prenom, String username, String password) {
 		super();
 		this.nom = nom;
 		this.prenom = prenom;
-		this.login = login;
+		this.username = username;
 		this.password = password;
 	}
 
-	public Employe(int id, String nom, String prenom, String login, String password) {
-		this(nom, prenom, login, password);
+	public Employe(int id, String nom, String prenom, String username, String password) {
+		this(nom, prenom, username, password);
 		this.id = id;
 	}
 
@@ -74,12 +90,12 @@ public abstract class Employe {
 		this.prenom = prenom;
 	}
 
-	public String getLogin() {
-		return login;
+	public String getUsername() {
+		return username;
 	}
-
-	public void setLogin(String login) {
-		this.login = login;
+	
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getPassword() {
@@ -87,6 +103,7 @@ public abstract class Employe {
 	}
 
 	public void setPassword(String password) {
+		//this.password = new BCryptPasswordEncoder().encode(password);
 		this.password = password;
 	}
 
@@ -97,6 +114,18 @@ public abstract class Employe {
 	public void setAgence(Agence agence) {
 		this.agence = agence;
 	}
-	
+
+	public Set<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
+	}
+
 	public abstract void setClients(Collection<Client> clients) throws Exception;
+
+	public void addRole(Role role) {
+        this.roles.add(role);
+    }
 }

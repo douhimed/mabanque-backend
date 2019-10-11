@@ -133,6 +133,11 @@ public class ConseillerServices implements IConseillerServices {
 		retirer(compteOne, montant);
 		return verser(compteTwo, montant);
 	}
+
+	@Override
+	public Employe getUser(String username) {
+		return this.employeDao.findByUsername(username);
+	}
 	
 	
 }

@@ -1,14 +1,18 @@
 package org.miage.mabanquebackend.web.models.tdo;
 
-import java.util.ArrayList;
-
 import org.miage.mabanquebackend.web.models.Conseiller;
 import org.miage.mabanquebackend.web.models.Employe;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 public class DTOEmploye {
 
 	private int id;
-	private String nom, prenom, password, login;
+	private String nom, prenom, password, username;
+    
+	@Autowired
+	private PasswordEncoder bcryptEncoder;
 
 	public DTOEmploye() {
 	}
@@ -43,14 +47,14 @@ public class DTOEmploye {
 		this.password = password;
 	}
 
-	public String getLogin() {
-		return login;
+	public String getUsername() {
+		return username;
 	}
-
-	public void setLogin(String login) {
-		this.login = login;
+	
+	public void setUsername(String username) {
+		this.username = username;
 	}
-
+	
 	public int getId() {
 		return id;
 	}
@@ -63,13 +67,13 @@ public class DTOEmploye {
 		String pass = this.nom.substring(0, 3) + this.prenom.substring(0, 3);
 		if (this.password != null && this.password.trim().length() >= 6)
 			pass =this.password;
-		String login = pass;
-		if (this.login != null && this.login.trim().length() >= 6)
-			login = this.login;
-		Employe emp = new Conseiller(this.nom, this.prenom, login, pass);
+		String username = pass;
+		if (this.username != null && this.username.trim().length() >= 6)
+			username = this.username;
+		Employe emp = new Conseiller(this.nom, this.prenom, username, bcryptEncoder.encode(pass));
 		if (this.id != 0)
 			emp.setId(this.id);		
 		return emp;
 	}
-
+	
 }

@@ -29,4 +29,6 @@ public interface IConseillerServices {
 
 	Compte addOperation(DTOOperation dtoOperation);
 
+	Employe getUser(String username);
+
 }

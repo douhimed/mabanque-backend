@@ -24,9 +24,4 @@ public class GerantController {
 		return this.gerantServices.getAgenceByGerant(idGerant);
 	}
 	
-	@GetMapping("/all")
-	public List<Agence> getAll(){
-		return this.gerantServices.getAllAgences();
-	}
-	
 }

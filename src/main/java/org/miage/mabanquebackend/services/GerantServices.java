@@ -11,6 +11,8 @@ import org.miage.mabanquebackend.web.models.Employe;
 import org.miage.mabanquebackend.web.models.Gerant;
 import org.miage.mabanquebackend.web.models.tdo.DTOEmploye;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,7 +26,9 @@ public class GerantServices implements IGerantServices {
 	@Autowired
 	private EmployeDao employeDao;
 
-
+	@Autowired
+	private PasswordEncoder bcryptEncoder;
+	
 	@Override
 	public Agence getAgenceByGerant(int idGerant) {
 		Employe gerant = this.employeDao.findById(idGerant).get();
