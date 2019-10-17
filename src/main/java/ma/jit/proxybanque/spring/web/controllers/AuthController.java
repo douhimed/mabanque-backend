@@ -1,7 +1,6 @@
 package ma.jit.proxybanque.spring.web.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -12,16 +11,13 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import ma.jit.proxybanque.spring.security.JwtTokenUtil;
-import ma.jit.proxybanque.spring.services.IConseillerServices;
 import ma.jit.proxybanque.spring.services.IGerantServices;
 import ma.jit.proxybanque.spring.services.jwt.JwtUserDetailsService;
 import ma.jit.proxybanque.spring.web.models.jwt.JwtRequest;
 import ma.jit.proxybanque.spring.web.models.jwt.JwtResponse;
-import ma.jit.proxybanque.spring.web.models.tdo.DTOUser;
 
 @RestController
 @CrossOrigin(origins = "*")

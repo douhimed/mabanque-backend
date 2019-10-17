@@ -1,7 +1,6 @@
 package ma.jit.proxybanque.spring.web.models.tdo;
 
 import ma.jit.proxybanque.spring.web.models.Client;
-import ma.jit.proxybanque.spring.web.models.Conseiller;
 
 public class DTOClient {
 

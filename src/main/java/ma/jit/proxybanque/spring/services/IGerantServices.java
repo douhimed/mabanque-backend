@@ -1,7 +1,5 @@
 package ma.jit.proxybanque.spring.services;
 
-import java.util.List;
-
 import ma.jit.proxybanque.spring.web.models.Agence;
 import ma.jit.proxybanque.spring.web.models.Employe;
 import ma.jit.proxybanque.spring.web.models.tdo.DTOEmploye;

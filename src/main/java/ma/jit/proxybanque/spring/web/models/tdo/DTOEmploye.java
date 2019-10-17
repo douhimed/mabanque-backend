@@ -1,8 +1,6 @@
 package ma.jit.proxybanque.spring.web.models.tdo;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import ma.jit.proxybanque.spring.web.models.Conseiller;
 import ma.jit.proxybanque.spring.web.models.Employe;

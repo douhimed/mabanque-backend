@@ -1,8 +1,5 @@
 package ma.jit.proxybanque.spring.services;
 
-import java.util.List;
-
-import javax.persistence.IdClass;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,9 +13,7 @@ import ma.jit.proxybanque.spring.web.models.Agence;
 import ma.jit.proxybanque.spring.web.models.Client;
 import ma.jit.proxybanque.spring.web.models.Compte;
 import ma.jit.proxybanque.spring.web.models.CompteCourant;
-import ma.jit.proxybanque.spring.web.models.Conseiller;
 import ma.jit.proxybanque.spring.web.models.Employe;
-import ma.jit.proxybanque.spring.web.models.Operation;
 import ma.jit.proxybanque.spring.web.models.Retrait;
 import ma.jit.proxybanque.spring.web.models.Versement;
 import ma.jit.proxybanque.spring.web.models.tdo.DTOEmploye;

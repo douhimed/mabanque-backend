@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import ma.jit.proxybanque.spring.services.ConseillerServices;
 import ma.jit.proxybanque.spring.services.IConseillerServices;
 import ma.jit.proxybanque.spring.web.models.Compte;
 import ma.jit.proxybanque.spring.web.models.tdo.DTOOperation;

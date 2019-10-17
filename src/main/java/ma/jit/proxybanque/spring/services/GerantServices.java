@@ -1,10 +1,7 @@
 package ma.jit.proxybanque.spring.services;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,7 +12,6 @@ import ma.jit.proxybanque.spring.web.models.Agence;
 import ma.jit.proxybanque.spring.web.models.Client;
 import ma.jit.proxybanque.spring.web.models.Compte;
 import ma.jit.proxybanque.spring.web.models.Employe;
-import ma.jit.proxybanque.spring.web.models.Gerant;
 import ma.jit.proxybanque.spring.web.models.tdo.DTOEmploye;
 import ma.jit.proxybanque.spring.web.models.tdo.DTOOperation;
 
@@ -24,13 +20,8 @@ import ma.jit.proxybanque.spring.web.models.tdo.DTOOperation;
 public class GerantServices extends ConseillerServices implements IGerantServices {
 
 	@Autowired
-	private AgenceDao agenceDao;
-
-	@Autowired
 	private EmployeDao employeDao;
 
-	@Autowired
-	private PasswordEncoder bcryptEncoder;
 
 	@Autowired
 	private IConseillerServices conseillerServices;
