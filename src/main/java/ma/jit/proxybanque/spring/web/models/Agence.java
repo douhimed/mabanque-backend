@@ -17,6 +17,7 @@ public class Agence {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
+	private String name;
 	@OneToMany(mappedBy = "agence", fetch = FetchType.LAZY)
 	@JsonIgnoreProperties("agence")
 	private Collection<Employe> employes;
@@ -25,7 +26,12 @@ public class Agence {
 	}
 
 	public Agence(int id) {
-		this.id=id;
+		this.id = id;
+	}
+
+	public Agence(String name) {
+		super();
+		this.name = name;
 	}
 
 	public void setId(int id) {
@@ -36,6 +42,13 @@ public class Agence {
 		return id;
 	}
 
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	
 	public Collection<Employe> getEmployes() {
 		return employes;
 	}

@@ -34,8 +34,8 @@ public class MabanqueBackendApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-		Agence a1 = new Agence();
-		Agence a2 = new Agence();
+		Agence a1 = new Agence("Agence Ouidad");
+		Agence a2 = new Agence("Agence Sallam");
 		this.agenceDao.save(a1);
 		this.agenceDao.save(a2);
 		
