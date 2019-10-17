@@ -14,9 +14,9 @@ public interface IConseillerServices {
 
 	void deleteClient(int id);
 
-	Client updateClient(Client client, int conseillerID);
+	Client updateClient(Client client, int employeId);
 
-	Client addClient(Client client, int conseillerID);
+	Client addClient(Client client, int employeId);
 
 	/*** Gestion des comptes ***/
 
@@ -32,7 +32,7 @@ public interface IConseillerServices {
 
 	/*** Gestion des employes ***/
 
-	Employe getConseiller(int id);
+	Employe getEmploye(int id);
 
 	Employe updateEmploye(DTOEmploye tdoEmp);
 

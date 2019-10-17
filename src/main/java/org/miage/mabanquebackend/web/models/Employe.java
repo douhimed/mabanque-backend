@@ -1,5 +1,6 @@
 package org.miage.mabanquebackend.web.models;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -9,6 +10,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,6 +20,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -34,32 +38,39 @@ public abstract class Employe {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	private String nom, prenom, username;
+	private String nom, prenom, username, email, adresse;
 	@JsonIgnore
 	private String password;
 	@ManyToOne
 	@JoinColumn(name = "CODE_AGENCE")
 	@JsonIgnoreProperties("employes")
 	private Agence agence;
+	@OneToMany(mappedBy = "employe", fetch = FetchType.LAZY)
+	@JsonIgnoreProperties("employe")
+	private Collection<Client> clients = new ArrayList<Client>();
+	protected String type;
 
 	public Employe() {
+		this.setType();
 	}
 
 	public Employe(int id) {
-		super();
+		this();
 		this.id = id;
 	}
 
-	public Employe(String nom, String prenom, String username, String password) {
-		super();
+	public Employe(String nom, String prenom, String username, String password, String email, String adresse) {
+		this();
 		this.nom = nom;
 		this.prenom = prenom;
 		this.username = username;
 		this.password = password;
+		this.email = email;
+		this.adresse = adresse;
 	}
 
-	public Employe(int id, String nom, String prenom, String username, String password) {
-		this(nom, prenom, username, password);
+	public Employe(int id, String nom, String prenom, String username, String password, String email, String adresse) {
+		this(nom, prenom, username, password,email, adresse);
 		this.id = id;
 	}
 
@@ -100,7 +111,6 @@ public abstract class Employe {
 	}
 
 	public void setPassword(String password) {
-		// this.password = new BCryptPasswordEncoder().encode(password);
 		this.password = password;
 	}
 
@@ -112,6 +122,38 @@ public abstract class Employe {
 		this.agence = agence;
 	}
 
-	public abstract void setClients(Collection<Client> clients) throws Exception;
+	public Collection<Client> getClients() {
+		return clients;
+	}
+
+	public void setClients(Collection<Client> clients) {
+		this.clients = clients;
+	}
+
+	public boolean addClient(Client client) {
+		return this.clients.add(client);
+	}
+
+	public void setAdresse(String adresse) {
+		this.adresse = adresse;
+	}
+
+	public String getAdresse() {
+		return adresse;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public abstract void setType();
 
 }

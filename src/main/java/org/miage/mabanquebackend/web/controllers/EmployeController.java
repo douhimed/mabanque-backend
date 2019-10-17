@@ -32,7 +32,7 @@ public class EmployeController {
 
 	@GetMapping("/{id}")
 	public Employe get(@PathVariable int id) {
-		return this.gerantServices.getConseiller(id);
+		return this.gerantServices.getEmploye(id);
 	}
 
 	@DeleteMapping("/{id}")
@@ -48,11 +48,8 @@ public class EmployeController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Void> addEmploye(@RequestBody DTOEmploye tdoEmp, @RequestHeader(name="id-user") int idUser) {
-		Employe employe = this.gerantServices.addEmploye(tdoEmp, idUser);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(employe.getId())
-				.toUri();
-		return ResponseEntity.created(uri).build();
+	public Employe addEmploye(@RequestBody DTOEmploye tdoEmp, @RequestHeader(name="id-user") int idUser) {
+		return this.gerantServices.addEmploye(tdoEmp, idUser);
 	}
 
 }

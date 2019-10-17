@@ -52,14 +52,14 @@ public class ConseillerServices implements IConseillerServices {
 	}
 
 	@Override
-	public Client addClient(Client client, int conseillerID) {
-		client.setConseiller(this.getConseiller(conseillerID));
+	public Client addClient(Client client, int employeId) {
+		client.setEmploye(this.getEmploye(employeId));
 		return this.clientDao.save(client);
 	}
 
 	@Override
-	public Client updateClient(Client client, int conseillerID) {
-		client.setConseiller(this.getConseiller(conseillerID));
+	public Client updateClient(Client client, int employeId) {
+		client.setEmploye(this.getEmploye(employeId));
 		return this.clientDao.save(client);
 	}
 
@@ -88,7 +88,7 @@ public class ConseillerServices implements IConseillerServices {
 			return this.verser(dtoOperation.getCompteOne(), dtoOperation.getMontant());
 		else if (dtoOperation.getType().equals("retirait"))
 			return this.retirer(dtoOperation.getCompteOne(), dtoOperation.getMontant());
-		else if (dtoOperation.getType().equals("verment"))
+		else if (dtoOperation.getType().equals("virment"))
 			return this.virment(dtoOperation.getCompteOne(), dtoOperation.getCompteTwo(), dtoOperation.getMontant());
 		return this.getCompte(dtoOperation.getCompteOne());
 	}
@@ -124,7 +124,7 @@ public class ConseillerServices implements IConseillerServices {
 	/*** Gestion des employes ***/
 
 	@Override
-	public Employe getConseiller(int id) {
+	public Employe getEmploye(int id) {
 		return this.employeDao.findById(id).get();
 	}
 

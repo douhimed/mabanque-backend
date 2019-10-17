@@ -22,7 +22,6 @@ import javax.persistence.OneToMany;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "TYPE_COMPTE", discriminatorType = DiscriminatorType.STRING, length = 2)
@@ -32,18 +31,19 @@ public abstract class Compte {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private double solde;
-	//@JsonIgnore
+	// @JsonIgnore
 	private Date creationDate = new Date();
+	private String code;
+
 	@ManyToOne
 	@JoinColumn(name = "CODE_CLIENT")
 	@JsonIgnoreProperties("comptes")
 	private Client client;
 	@OneToMany(mappedBy = "compte", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
 	@JsonIgnoreProperties("compte")
-	private Collection<Operation> operations;
+	private Collection<Operation> operations =new ArrayList<Operation>();
 
 	public Compte() {
-		operations = new ArrayList<Operation>();
 	}
 
 	public Compte(double solde) {
@@ -51,6 +51,12 @@ public abstract class Compte {
 		this.solde = solde;
 	}
 
+	public Compte(double solde, String code) {
+		super();
+		this.solde = solde;
+		this.code = code;
+	}
+	
 	public int getId() {
 		return id;
 	}
@@ -90,5 +96,14 @@ public abstract class Compte {
 	public void setClient(Client client) {
 		this.client = client;
 	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
 
 }

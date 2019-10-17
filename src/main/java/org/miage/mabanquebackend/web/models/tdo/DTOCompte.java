@@ -8,7 +8,7 @@ public class DTOCompte {
 
 	private int id, clientId;
 	private double solde, taux, decouvert;
-	private String type;
+	private String type, codeCompte;
 
 	public DTOCompte() {
 	}
@@ -61,12 +61,20 @@ public class DTOCompte {
 		this.type = type;
 	}
 
+	public String getCodeCompte() {
+		return codeCompte;
+	}
+
+	public void setCodeCompte(String codeCompte) {
+		this.codeCompte = codeCompte;
+	}
+
 	public Compte buildCompte() {
 		Compte compte;
 		if (this.type.equals("cc")) {
-			compte = new CompteCourant(this.solde, this.decouvert);
+			compte = new CompteCourant(solde, codeCompte, decouvert);
 		} else {
-			compte = new CompteEpargne(this.solde, this.taux);
+			compte = new CompteEpargne(solde, codeCompte, taux);
 		}
 		compte.setId(this.id != 0 ? this.id : 0);
 		return compte;

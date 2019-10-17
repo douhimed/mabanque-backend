@@ -26,9 +26,9 @@ public class Client {
 	@JsonIgnoreProperties("client")
 	private Collection<Compte> comptes;
 	@ManyToOne
-	@JoinColumn(name = "CODE_CONSEILLER")
+	@JoinColumn(name = "CODE_EMPLOYE")
 	@JsonIgnoreProperties("clients")
-	private Employe conseiller;
+	private Employe employe;
 
 	public Client() {
 	}
@@ -124,13 +124,13 @@ public class Client {
 	public void setComptes(Collection<Compte> comptes) {
 		this.comptes = comptes;
 	}
-	
-	public Employe getConseiller() {
-		return conseiller;
+
+	public Employe getEmploye() {
+		return employe;
 	}
-	
-	public void setConseiller(Employe conseiller) {
-		this.conseiller = conseiller;
+
+	public void setEmploye(Employe employe) {
+		this.employe = employe;
 	}
 
 }

@@ -5,9 +5,9 @@ import org.miage.mabanquebackend.web.models.Conseiller;
 
 public class DTOClient {
 
-	private int id, codePostal, conseillerID;
-	private String nom, prenom, email,tel, ville, adresse;
-	
+	private int id, codePostal, employeID;
+	private String nom, prenom, email, tel, ville, adresse;
+
 	public DTOClient() {
 		super();
 	}
@@ -28,12 +28,12 @@ public class DTOClient {
 		this.codePostal = codePostal;
 	}
 
-	public int getConseillerID() {
-		return conseillerID;
+	public int getEmployeID() {
+		return employeID;
 	}
 
-	public void setConseillerID(int conseillerID) {
-		this.conseillerID = conseillerID;
+	public void setEmployeID(int employeID) {
+		this.employeID = employeID;
 	}
 
 	public String getNom() {
@@ -75,19 +75,20 @@ public class DTOClient {
 	public void setVille(String ville) {
 		this.ville = ville;
 	}
-	
-	
+
 	public String getAdresse() {
 		return adresse;
 	}
+
 	public void setAdresse(String adresse) {
 		this.adresse = adresse;
 	}
-	
+
 	public Client buildClient() {
-		Client client = new Client(this.nom, this.prenom, this.email, this.adresse, this.ville, this.tel, this.codePostal);
-		client.setId(this.id != 0 ? this.id : 0);	
+		Client client = new Client(this.nom, this.prenom, this.email, this.adresse, this.ville, this.tel,
+				this.codePostal);
+		client.setId(this.id != 0 ? this.id : 0);
 		return client;
 	}
-	
+
 }

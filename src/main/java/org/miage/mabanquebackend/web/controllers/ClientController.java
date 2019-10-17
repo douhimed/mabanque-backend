@@ -43,12 +43,12 @@ public class ClientController {
 
 	@PostMapping
 	public Client addClient(@RequestBody DTOClient tdoClient) {
-		return this.conseillerServices.addClient(tdoClient.buildClient(), tdoClient.getConseillerID());
+		return this.conseillerServices.addClient(tdoClient.buildClient(), tdoClient.getEmployeID());
 	}
 
 	@PutMapping
 	public Client update(@RequestBody DTOClient tdoClient) {
-		return this.conseillerServices.updateClient(tdoClient.buildClient(), tdoClient.getConseillerID());
+		return this.conseillerServices.updateClient(tdoClient.buildClient(), tdoClient.getEmployeID());
 
 	}
 

@@ -74,8 +74,8 @@ public class GerantServices extends ConseillerServices implements IGerantService
 
 	/*** Gestion des employes ***/
 
-	public Employe getConseiller(int id) {
-		return conseillerServices.getConseiller(id);
+	public Employe getEmploye(int id) {
+		return conseillerServices.getEmploye(id);
 	}
 
 	public Employe updateEmploye(DTOEmploye tdoEmp) {

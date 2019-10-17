@@ -9,15 +9,17 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class DTOEmploye {
 
 	private int id;
-	private String nom, prenom, password, username;
+	private String nom, prenom, password, username, email, adresse;
 
 	public DTOEmploye() {
 	}
 
-	public DTOEmploye(String nom, String prenom) {
+	public DTOEmploye(String nom, String prenom, String email, String adresse) {
 		super();
 		this.nom = nom;
 		this.prenom = prenom;
+		this.email = email;
+		this.adresse = adresse;
 	}
 
 	public String getNom() {
@@ -47,11 +49,11 @@ public class DTOEmploye {
 	public String getUsername() {
 		return username;
 	}
-	
+
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	
+
 	public int getId() {
 		return id;
 	}
@@ -60,17 +62,33 @@ public class DTOEmploye {
 		this.id = id;
 	}
 
+	public String getAdresse() {
+		return adresse;
+	}
+
+	public void setAdresse(String adresse) {
+		this.adresse = adresse;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	public Employe buildConseiller() {
 		String pass = this.nom.substring(0, 2) + this.prenom.substring(0, 2);
 		if (this.password != null && this.password.trim().length() >= 6)
-			pass =this.password;
+			pass = this.password;
 		String username = pass;
 		if (this.username != null && this.username.trim().length() >= 2)
 			username = this.username;
-		Employe emp = new Conseiller(this.nom, this.prenom, username, new BCryptPasswordEncoder().encode(pass));
+		Employe emp = new Conseiller(this.nom, this.prenom, username, new BCryptPasswordEncoder().encode(pass), this.email, this.adresse);
 		if (this.id != 0)
-			emp.setId(this.id);		
+			emp.setId(this.id);
 		return emp;
 	}
-	
+
 }
