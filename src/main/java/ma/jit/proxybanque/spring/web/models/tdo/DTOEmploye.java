@@ -7,18 +7,19 @@ import ma.jit.proxybanque.spring.web.models.Employe;
 
 public class DTOEmploye {
 
-	private int id;
+	private int id, idResponsable;
 	private String nom, prenom, password, username, email, adresse;
 
 	public DTOEmploye() {
 	}
 
-	public DTOEmploye(String nom, String prenom, String email, String adresse) {
+	public DTOEmploye(String nom, String prenom, String email, String adresse, int idResponsable) {
 		super();
 		this.nom = nom;
 		this.prenom = prenom;
 		this.email = email;
 		this.adresse = adresse;
+		this.idResponsable = idResponsable;
 	}
 
 	public String getNom() {
@@ -77,6 +78,14 @@ public class DTOEmploye {
 		this.email = email;
 	}
 
+	public int getIdResponsable() {
+		return idResponsable;
+	}
+
+	public void setIdResponsable(int idResponsable) {
+		this.idResponsable = idResponsable;
+	}
+
 	public Employe buildConseiller() {
 		String pass = this.nom.substring(0, 2) + this.prenom.substring(0, 2);
 		if (this.password != null && this.password.trim().length() >= 6)
@@ -84,7 +93,9 @@ public class DTOEmploye {
 		String username = pass;
 		if (this.username != null && this.username.trim().length() >= 2)
 			username = this.username;
-		Employe emp = new Conseiller(this.nom, this.prenom, username, new BCryptPasswordEncoder().encode(pass), this.email, this.adresse);
+		Employe emp = new Conseiller(this.nom, this.prenom, username, new BCryptPasswordEncoder().encode(pass),
+				this.email, this.adresse);
+		emp.setIdResponsable(this.idResponsable);
 		if (this.id != 0)
 			emp.setId(this.id);
 		return emp;

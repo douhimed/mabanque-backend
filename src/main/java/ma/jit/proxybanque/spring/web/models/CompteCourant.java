@@ -12,8 +12,8 @@ public class CompteCourant extends Compte {
 	public CompteCourant() {
 	}
 
-	public CompteCourant(double solde, String code, double decouvert) {
-		super(solde, code);
+	public CompteCourant(double solde, double decouvert) {
+		super(solde);
 		this.decouvert = decouvert;
 	}
 

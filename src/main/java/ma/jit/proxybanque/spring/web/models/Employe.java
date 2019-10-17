@@ -1,13 +1,9 @@
 package ma.jit.proxybanque.spring.web.models;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
 
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,7 +12,6 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -36,10 +31,8 @@ public abstract class Employe {
 	@JoinColumn(name = "CODE_AGENCE")
 	@JsonIgnoreProperties("employes")
 	private Agence agence;
-	@OneToMany(mappedBy = "employe", fetch = FetchType.LAZY)
-	@JsonIgnoreProperties("employe")
-	private Collection<Client> clients = new ArrayList<Client>();
 	protected String type;
+	protected int idResponsable;
 
 	public Employe() {
 		this.setType();
@@ -113,18 +106,6 @@ public abstract class Employe {
 		this.agence = agence;
 	}
 
-	public Collection<Client> getClients() {
-		return clients;
-	}
-
-	public void setClients(Collection<Client> clients) {
-		this.clients = clients;
-	}
-
-	public boolean addClient(Client client) {
-		return this.clients.add(client);
-	}
-
 	public void setAdresse(String adresse) {
 		this.adresse = adresse;
 	}
@@ -145,6 +126,12 @@ public abstract class Employe {
 		return type;
 	}
 
+	public int getIdResponsable() {
+		return idResponsable;
+	}
+	
+	
 	public abstract void setType();
-
+	public abstract void setIdResponsable(int idReponsable);
+	
 }

@@ -1,5 +1,6 @@
 package ma.jit.proxybanque.spring.web.models;
 
+
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
@@ -7,6 +8,7 @@ import javax.persistence.Entity;
 @DiscriminatorValue("G")
 public class Gerant extends Employe {
 
+	
 	public Gerant() {
 		super();
 	}
@@ -28,4 +30,12 @@ public class Gerant extends Employe {
 		this.type = "gerant";
 	}
 
+	@Override
+	public void setIdResponsable(int idReponsable) {
+		this.idResponsable = 0;
+	}
+
+
+
+	
 }

@@ -1,5 +1,6 @@
 package ma.jit.proxybanque.spring.services;
 
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -50,7 +51,15 @@ public class ConseillerServices implements IConseillerServices {
 	@Override
 	public Client addClient(Client client, int employeId) {
 		client.setEmploye(this.getEmploye(employeId));
-		return this.clientDao.save(client);
+
+		Compte compte = new CompteCourant(20, 100);
+		String code = compte.getCode();
+		while (this.compteDao.findByCode(code) != null)
+			compte.setCode("");
+		this.clientDao.save(client);
+		compte.setClient(client);
+		this.compteDao.save(compte);
+		return client;
 	}
 
 	@Override

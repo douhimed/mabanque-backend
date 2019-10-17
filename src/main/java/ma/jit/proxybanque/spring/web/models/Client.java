@@ -26,7 +26,7 @@ public class Client {
 	@JsonIgnoreProperties("client")
 	private Collection<Compte> comptes;
 	@ManyToOne
-	@JoinColumn(name = "CODE_EMPLOYE")
+	@JoinColumn(name = "CODE_EMPLOYE", nullable=true)
 	@JsonIgnoreProperties("clients")
 	private Employe employe;
 

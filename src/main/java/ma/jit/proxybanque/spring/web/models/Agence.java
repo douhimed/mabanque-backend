@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -21,16 +22,20 @@ public class Agence {
 	@OneToMany(mappedBy = "agence", fetch = FetchType.LAZY)
 	@JsonIgnoreProperties("agence")
 	private Collection<Employe> employes;
+	@OneToOne(mappedBy = "agence")
+	@JsonIgnoreProperties("agence")
+	private Compte compte;
 
 	public Agence() {
 	}
 
 	public Agence(int id) {
+		this();
 		this.id = id;
 	}
 
 	public Agence(String name) {
-		super();
+		this();
 		this.name = name;
 	}
 
@@ -45,16 +50,25 @@ public class Agence {
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 	public Collection<Employe> getEmployes() {
 		return employes;
 	}
 
 	public void setEmployes(Collection<Employe> employes) {
 		this.employes = employes;
+	}
+
+	public Compte getCompte() {
+		return compte;
+	}
+
+	public void setCompte(Compte compte) {
+		this.compte = compte;
 	}
 
 }

@@ -27,7 +27,7 @@ public class Versement extends Operation {
 
 	@Override
 	public void setType() {
-		this.type = "Verment";
+		this.type = "Virment";
 	}
 
 }

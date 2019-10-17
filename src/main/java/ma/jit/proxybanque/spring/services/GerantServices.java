@@ -1,6 +1,8 @@
 package ma.jit.proxybanque.spring.services;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -66,6 +68,12 @@ public class GerantServices extends ConseillerServices implements IGerantService
 
 	/*** Gestion des employes ***/
 
+
+	@Override
+	public List<Employe> getEmployesByGerant(int id) {
+		return this.employeDao.findByIdResponsable(id);
+	}
+	
 	public Employe getEmploye(int id) {
 		return conseillerServices.getEmploye(id);
 	}
@@ -95,5 +103,6 @@ public class GerantServices extends ConseillerServices implements IGerantService
 		employe.setAgence(getAgenceByGerant(idGerant));
 		return this.employeDao.save(employe);
 	}
+
 
 }

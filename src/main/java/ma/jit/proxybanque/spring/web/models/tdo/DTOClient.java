@@ -4,7 +4,7 @@ import ma.jit.proxybanque.spring.web.models.Client;
 
 public class DTOClient {
 
-	private int id, codePostal, employeID;
+	private int id, codePostal, conseillerID;
 	private String nom, prenom, email, tel, ville, adresse;
 
 	public DTOClient() {
@@ -27,12 +27,12 @@ public class DTOClient {
 		this.codePostal = codePostal;
 	}
 
-	public int getEmployeID() {
-		return employeID;
+	public int getConseillerID() {
+		return conseillerID;
 	}
 
-	public void setEmployeID(int employeID) {
-		this.employeID = employeID;
+	public void setConseillerID(int conseillerID) {
+		this.conseillerID = conseillerID;
 	}
 
 	public String getNom() {

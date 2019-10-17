@@ -10,6 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import ma.jit.proxybanque.spring.dao.AgenceDao;
 
 import ma.jit.proxybanque.spring.dao.EmployeDao;
+import ma.jit.proxybanque.spring.services.IParamDashboard;
 import ma.jit.proxybanque.spring.web.models.Agence;
 import ma.jit.proxybanque.spring.web.models.Employe;
 import ma.jit.proxybanque.spring.web.models.Gerant;
@@ -19,7 +20,7 @@ import ma.jit.proxybanque.spring.web.models.Gerant;
 public class MabanqueBackendApplication implements CommandLineRunner {
 
 	@Autowired
-	private AgenceDao agenceDao;
+	private IParamDashboard params;
 
 	@Autowired
 	private EmployeDao employeDao;
@@ -34,10 +35,12 @@ public class MabanqueBackendApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-		Agence a1 = new Agence("Agence Ouidad");
+		/*
+		Agence a1 = new Agence("Agence EL bouraq");
+		this.params.addAgance(a1);
+		
 		Agence a2 = new Agence("Agence Sallam");
-		this.agenceDao.save(a1);
-		this.agenceDao.save(a2);
+		this.params.addAgance(a2);
 		
 		Employe g1 = new Gerant("DOUHI", "Mohammed", "med-douhi", bcryptEncoder.encode("pass"), "douhi@gmail.com", "Oujda LOT Douhi");
 		g1.setAgence(a1);
@@ -46,7 +49,7 @@ public class MabanqueBackendApplication implements CommandLineRunner {
 		
 		this.employeDao.save(g1);
 		this.employeDao.save(g2);
-	
+	*/
 	}
 
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
+import java.util.Random;
 
 import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorColumn;
@@ -18,6 +19,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -32,7 +34,7 @@ public abstract class Compte {
 	private double solde;
 	// @JsonIgnore
 	private Date creationDate = new Date();
-	private String code;
+	private String code = generateCode(7);
 
 	@ManyToOne
 	@JoinColumn(name = "CODE_CLIENT")
@@ -40,7 +42,11 @@ public abstract class Compte {
 	private Client client;
 	@OneToMany(mappedBy = "compte", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
 	@JsonIgnoreProperties("compte")
-	private Collection<Operation> operations =new ArrayList<Operation>();
+	private Collection<Operation> operations = new ArrayList<Operation>();
+	@OneToOne
+	@JoinColumn(name = "agence_id", referencedColumnName = "id", nullable=true)
+	@JsonIgnoreProperties("compte")
+	private Agence agence;
 
 	public Compte() {
 	}
@@ -55,7 +61,7 @@ public abstract class Compte {
 		this.solde = solde;
 		this.code = code;
 	}
-	
+
 	public int getId() {
 		return id;
 	}
@@ -102,7 +108,19 @@ public abstract class Compte {
 
 	public void setCode(String code) {
 		this.code = code;
+		if(code.equals("") || code.length() == 0)
+			this.code = this.generateCode(7);
 	}
 
-
+	private String generateCode(int lingth) {
+		int m = (int) Math.pow(10, lingth - 1);
+		return String.valueOf(m + new Random().nextInt(9 * m));
+	}
+	
+	public Agence getAgence() {
+		return agence;
+	}
+	public void setAgence(Agence agence) {
+		this.agence = agence;
+	}
 }

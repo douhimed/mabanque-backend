@@ -43,9 +43,8 @@ public class EmployeController {
 	}
 	
 	@PutMapping
-	public ResponseEntity<Employe> update(@RequestBody DTOEmploye tdoEmp) {
-		Employe employe = this.gerantServices.updateEmploye(tdoEmp);
-		return new ResponseEntity<Employe>(employe, HttpStatus.OK);
+	public Employe update(@RequestBody DTOEmploye tdoEmp) {
+		return  this.gerantServices.updateEmploye(tdoEmp);
 	}
 	
 	@PostMapping
