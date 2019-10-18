@@ -14,7 +14,7 @@ import ma.jit.proxybanque.spring.web.models.Agence;
 import ma.jit.proxybanque.spring.web.models.Client;
 import ma.jit.proxybanque.spring.web.models.Compte;
 import ma.jit.proxybanque.spring.web.models.CompteCourant;
-import ma.jit.proxybanque.spring.web.models.Employe;
+import ma.jit.proxybanque.spring.web.models.Employer;
 import ma.jit.proxybanque.spring.web.models.Retrait;
 import ma.jit.proxybanque.spring.web.models.Versement;
 import ma.jit.proxybanque.spring.web.models.tdo.DTOEmploye;
@@ -89,13 +89,13 @@ public class ConseillerServices implements IConseillerServices {
 	/*** Gestion des operations ***/
 
 	public Compte addOperation(DTOOperation dtoOperation) {
-		double newMontant = this.profit(dtoOperation.getMontant(), dtoOperation.getConseillerID());
 		if (dtoOperation.getType().equals("verser"))
-			return this.verser(dtoOperation.getCompteOne(), newMontant);
+			return this.verser(dtoOperation.getCompteOne(), dtoOperation.getMontant());
 		else if (dtoOperation.getType().equals("retirait"))
-			return this.retirer(dtoOperation.getCompteOne(), newMontant);
-		else if (dtoOperation.getType().equals("virment"))
-			return this.virment(dtoOperation.getCompteOne(), dtoOperation.getCompteTwo(), newMontant);
+			return this.retirer(dtoOperation.getCompteOne(), dtoOperation.getMontant());
+		else if (dtoOperation.getType().equals("virment")) {
+			return this.virment(dtoOperation);
+		}
 		return this.getCompte(dtoOperation.getCompteOne());
 	}
 
@@ -120,46 +120,53 @@ public class ConseillerServices implements IConseillerServices {
 	public Compte retirer(int id, double montant) {
 		Compte compte = this.getCompte(id);
 		double facilitiesCaisse = 0;
-		if (compte instanceof CompteCourant)
-			facilitiesCaisse = ((CompteCourant) compte).getDecouvert();
-		if (compte.getSolde() + facilitiesCaisse < montant)
-			throw new RuntimeException("solde insuffisant");
+//		if (compte instanceof CompteCourant)
+//			facilitiesCaisse = ((CompteCourant) compte).getDecouvert();
+//		if (compte.getSolde() + facilitiesCaisse < montant)
+//			throw new RuntimeException("solde insuffisant");
 		Retrait retrait = new Retrait(montant, compte);
 		this.operationdao.save(retrait);
 		compte.setSolde(compte.getSolde() - montant);
 		return this.compteDao.save(compte);
 	}
 
-	public Compte virment(int compteOne, int compteTwo, double montant) {
-		if (compteOne == compteTwo)
+	public Compte virment(DTOOperation dtoOperation) {
+		
+		if (dtoOperation.getCompteOne() == dtoOperation.getCompteTwo())
 			throw new RuntimeException("Interdit sur le meme compte");
-		retirer(compteOne, montant);
-		return verser(compteTwo, montant);
+		
+		Compte cmp = this.getCompte(dtoOperation.getCompteOne());
+		if(cmp instanceof CompteCourant && cmp.getSolde() - dtoOperation.getMontant() <= -1000)
+			throw new RuntimeException("Vous avez atteindré le max de découvert, le virment possible : " + (1000 + cmp.getSolde()));
+		
+		double newMontant = this.profit(dtoOperation.getMontant(), dtoOperation.getConseillerID());
+		double montant = dtoOperation.getMontant();
+		retirer(dtoOperation.getCompteOne(), montant + (montant - newMontant));
+		return verser(dtoOperation.getCompteTwo(), montant);
 	}
 
 	/*** Gestion des employes ***/
 
 	@Override
-	public Employe getEmploye(int id) {
+	public Employer getEmploye(int id) {
 		return this.employeDao.findById(id).get();
 	}
 
 	@Override
-	public Employe updateEmploye(DTOEmploye tdoEmp) {
-		Employe employe = tdoEmp.buildConseiller();
+	public Employer updateEmploye(DTOEmploye tdoEmp) {
+		Employer employe = tdoEmp.buildConseiller();
 		employe.setAgence(getAgenceByConseiller(employe.getId()));
 		return this.employeDao.save(employe);
 	}
 
 	@Override
-	public Employe getUser(String username) {
+	public Employer getUser(String username) {
 		return this.employeDao.findByUsername(username);
 	}
 
 	private Agence getAgenceByConseiller(int idUser) {
-		Employe gerant = this.employeDao.findById(idUser).get();
+		Employer gerant = this.employeDao.findById(idUser).get();
 		return gerant.getAgence();
 	}
-
 
 }

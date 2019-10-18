@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "TYPE_EMPLOYE", discriminatorType = DiscriminatorType.STRING, length = 1)
-public abstract class Employe {
+public abstract class Employer {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -34,16 +34,16 @@ public abstract class Employe {
 	protected String type;
 	protected int idResponsable;
 
-	public Employe() {
+	public Employer() {
 		this.setType();
 	}
 
-	public Employe(int id) {
+	public Employer(int id) {
 		this();
 		this.id = id;
 	}
 
-	public Employe(String nom, String prenom, String username, String password, String email, String adresse) {
+	public Employer(String nom, String prenom, String username, String password, String email, String adresse) {
 		this();
 		this.nom = nom;
 		this.prenom = prenom;
@@ -53,7 +53,7 @@ public abstract class Employe {
 		this.adresse = adresse;
 	}
 
-	public Employe(int id, String nom, String prenom, String username, String password, String email, String adresse) {
+	public Employer(int id, String nom, String prenom, String username, String password, String email, String adresse) {
 		this(nom, prenom, username, password,email, adresse);
 		this.id = id;
 	}
@@ -129,7 +129,6 @@ public abstract class Employe {
 	public int getIdResponsable() {
 		return idResponsable;
 	}
-	
 	
 	public abstract void setType();
 	public abstract void setIdResponsable(int idReponsable);

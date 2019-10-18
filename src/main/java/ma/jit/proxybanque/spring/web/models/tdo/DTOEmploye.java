@@ -3,7 +3,7 @@ package ma.jit.proxybanque.spring.web.models.tdo;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import ma.jit.proxybanque.spring.web.models.Conseiller;
-import ma.jit.proxybanque.spring.web.models.Employe;
+import ma.jit.proxybanque.spring.web.models.Employer;
 
 public class DTOEmploye {
 
@@ -86,14 +86,8 @@ public class DTOEmploye {
 		this.idResponsable = idResponsable;
 	}
 
-	public Employe buildConseiller() {
-		String pass = this.nom.substring(0, 2) + this.prenom.substring(0, 2);
-		if (this.password != null && this.password.trim().length() >= 6)
-			pass = this.password;
-		String username = pass;
-		if (this.username != null && this.username.trim().length() >= 2)
-			username = this.username;
-		Employe emp = new Conseiller(this.nom, this.prenom, username, new BCryptPasswordEncoder().encode(pass),
+	public Employer buildConseiller() {
+		Employer emp = new Conseiller(this.nom, this.prenom, this.username, new BCryptPasswordEncoder().encode(this.password),
 				this.email, this.adresse);
 		emp.setIdResponsable(this.idResponsable);
 		if (this.id != 0)

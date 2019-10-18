@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 import ma.jit.proxybanque.spring.dao.EmployeDao;
 import ma.jit.proxybanque.spring.web.models.Conseiller;
-import ma.jit.proxybanque.spring.web.models.Employe;
+import ma.jit.proxybanque.spring.web.models.Employer;
 import ma.jit.proxybanque.spring.web.models.tdo.DTOUser;
 
 @Service
@@ -26,7 +26,7 @@ public class JwtUserDetailsService implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		Employe user = employeDao.findByUsername(username);
+		Employer user = employeDao.findByUsername(username);
 		if (user == null) {
 			throw new UsernameNotFoundException("User not found with username: " + username);
 		}

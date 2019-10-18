@@ -14,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @DiscriminatorValue("C")
-public class Conseiller extends Employe {
+public class Conseiller extends Employer {
 
 	@OneToMany(mappedBy = "employe", fetch = FetchType.LAZY)
 	@JsonIgnoreProperties("employe")

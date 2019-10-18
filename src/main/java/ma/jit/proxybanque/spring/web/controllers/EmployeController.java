@@ -20,7 +20,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import ma.jit.proxybanque.spring.services.IConseillerServices;
 import ma.jit.proxybanque.spring.services.IGerantServices;
 import ma.jit.proxybanque.spring.web.models.Client;
-import ma.jit.proxybanque.spring.web.models.Employe;
+import ma.jit.proxybanque.spring.web.models.Employer;
 import ma.jit.proxybanque.spring.web.models.tdo.DTOEmploye;
 
 @RestController
@@ -32,7 +32,7 @@ public class EmployeController {
 
 
 	@GetMapping("/{id}")
-	public Employe get(@PathVariable int id) {
+	public Employer get(@PathVariable int id) {
 		return this.gerantServices.getEmploye(id);
 	}
 
@@ -43,12 +43,12 @@ public class EmployeController {
 	}
 	
 	@PutMapping
-	public Employe update(@RequestBody DTOEmploye tdoEmp) {
+	public Employer update(@RequestBody DTOEmploye tdoEmp) {
 		return  this.gerantServices.updateEmploye(tdoEmp);
 	}
 	
 	@PostMapping
-	public Employe addEmploye(@RequestBody DTOEmploye tdoEmp, @RequestHeader(name="id-user") int idUser) {
+	public Employer addEmploye(@RequestBody DTOEmploye tdoEmp, @RequestHeader(name="id-user") int idUser) {
 		return this.gerantServices.addEmploye(tdoEmp, idUser);
 	}
 

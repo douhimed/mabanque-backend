@@ -28,7 +28,7 @@ public class Client {
 	@ManyToOne
 	@JoinColumn(name = "CODE_EMPLOYE", nullable=true)
 	@JsonIgnoreProperties("clients")
-	private Employe employe;
+	private Employer employe;
 
 	public Client() {
 	}
@@ -125,11 +125,11 @@ public class Client {
 		this.comptes = comptes;
 	}
 
-	public Employe getEmploye() {
+	public Employer getEmploye() {
 		return employe;
 	}
 
-	public void setEmploye(Employe employe) {
+	public void setEmploye(Employer employe) {
 		this.employe = employe;
 	}
 

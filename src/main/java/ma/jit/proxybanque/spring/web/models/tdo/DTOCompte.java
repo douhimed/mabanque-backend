@@ -1,7 +1,5 @@
 package ma.jit.proxybanque.spring.web.models.tdo;
 
-import java.util.Random;
-
 import ma.jit.proxybanque.spring.web.models.Compte;
 import ma.jit.proxybanque.spring.web.models.CompteCourant;
 import ma.jit.proxybanque.spring.web.models.CompteEpargne;
@@ -81,9 +79,9 @@ public class DTOCompte {
 	public Compte buildCompte() {
 		Compte compte;
 		if (this.type.equals("cc")) {
-			compte = new CompteCourant(solde,decouvert, this.carteType);
+			compte = new CompteCourant(solde,1000, this.carteType);
 		} else {
-			compte = new CompteEpargne(solde, taux);
+			compte = new CompteEpargne(solde, 3);
 		}
 		compte.setId(this.id != 0 ? this.id : 0);
 		return compte;

@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 
 @Entity
 @DiscriminatorValue("G")
-public class Gerant extends Employe {
+public class Gerant extends Employer {
 
 	
 	public Gerant() {

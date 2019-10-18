@@ -2,7 +2,7 @@ package ma.jit.proxybanque.spring.services;
 
 import ma.jit.proxybanque.spring.web.models.Client;
 import ma.jit.proxybanque.spring.web.models.Compte;
-import ma.jit.proxybanque.spring.web.models.Employe;
+import ma.jit.proxybanque.spring.web.models.Employer;
 import ma.jit.proxybanque.spring.web.models.tdo.DTOEmploye;
 import ma.jit.proxybanque.spring.web.models.tdo.DTOOperation;
 
@@ -32,10 +32,10 @@ public interface IConseillerServices {
 
 	/*** Gestion des employes ***/
 
-	Employe getEmploye(int id);
+	Employer getEmploye(int id);
 
-	Employe updateEmploye(DTOEmploye tdoEmp);
+	Employer updateEmploye(DTOEmploye tdoEmp);
 
-	Employe getUser(String username);
+	Employer getUser(String username);
 
 }

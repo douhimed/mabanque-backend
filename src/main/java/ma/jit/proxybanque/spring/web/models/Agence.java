@@ -21,7 +21,7 @@ public class Agence {
 	private String name;
 	@OneToMany(mappedBy = "agence", fetch = FetchType.LAZY)
 	@JsonIgnoreProperties("agence")
-	private Collection<Employe> employes;
+	private Collection<Employer> employes;
 	@OneToOne(mappedBy = "agence")
 	@JsonIgnoreProperties("agence")
 	private Compte compte;
@@ -55,11 +55,11 @@ public class Agence {
 		this.name = name;
 	}
 
-	public Collection<Employe> getEmployes() {
+	public Collection<Employer> getEmployes() {
 		return employes;
 	}
 
-	public void setEmployes(Collection<Employe> employes) {
+	public void setEmployes(Collection<Employer> employes) {
 		this.employes = employes;
 	}
 

@@ -13,7 +13,7 @@ import ma.jit.proxybanque.spring.dao.EmployeDao;
 import ma.jit.proxybanque.spring.web.models.Agence;
 import ma.jit.proxybanque.spring.web.models.Client;
 import ma.jit.proxybanque.spring.web.models.Compte;
-import ma.jit.proxybanque.spring.web.models.Employe;
+import ma.jit.proxybanque.spring.web.models.Employer;
 import ma.jit.proxybanque.spring.web.models.tdo.DTOEmploye;
 import ma.jit.proxybanque.spring.web.models.tdo.DTOOperation;
 
@@ -70,25 +70,25 @@ public class GerantServices extends ConseillerServices implements IGerantService
 
 
 	@Override
-	public List<Employe> getEmployesByGerant(int id) {
+	public List<Employer> getEmployesByGerant(int id) {
 		return this.employeDao.findByIdResponsable(id);
 	}
 	
-	public Employe getEmploye(int id) {
+	public Employer getEmploye(int id) {
 		return conseillerServices.getEmploye(id);
 	}
 
-	public Employe updateEmploye(DTOEmploye tdoEmp) {
+	public Employer updateEmploye(DTOEmploye tdoEmp) {
 		return conseillerServices.updateEmploye(tdoEmp);
 	}
 
-	public Employe getUser(String username) {
+	public Employer getUser(String username) {
 		return conseillerServices.getUser(username);
 	}
 
 	@Override
 	public Agence getAgenceByGerant(int idGerant) {
-		Employe gerant = this.employeDao.findById(idGerant).get();
+		Employer gerant = this.employeDao.findById(idGerant).get();
 		return gerant.getAgence();
 	}
 
@@ -98,8 +98,8 @@ public class GerantServices extends ConseillerServices implements IGerantService
 	}
 
 	@Override
-	public Employe addEmploye(DTOEmploye tdoEmp, int idGerant) {
-		Employe employe = tdoEmp.buildConseiller();
+	public Employer addEmploye(DTOEmploye tdoEmp, int idGerant) {
+		Employer employe = tdoEmp.buildConseiller();
 		employe.setAgence(getAgenceByGerant(idGerant));
 		return this.employeDao.save(employe);
 	}

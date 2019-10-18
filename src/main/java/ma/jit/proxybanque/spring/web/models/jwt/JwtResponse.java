@@ -2,7 +2,7 @@ package ma.jit.proxybanque.spring.web.models.jwt;
 
 import java.io.Serializable;
 
-import ma.jit.proxybanque.spring.web.models.Employe;
+import ma.jit.proxybanque.spring.web.models.Employer;
 import ma.jit.proxybanque.spring.web.models.Gerant;
 
 public class JwtResponse implements Serializable {
@@ -16,7 +16,7 @@ public class JwtResponse implements Serializable {
 		this.jwttoken = jwttoken;
 	}
 
-	public JwtResponse(String token, Employe user) {
+	public JwtResponse(String token, Employer user) {
 		this.jwttoken = token;
 		this.idUser = user.getId();
 		if (user instanceof Gerant)
