@@ -49,7 +49,7 @@ public class MabanqueBackendApplication implements CommandLineRunner {
 		
 		this.employeDao.save(g1);
 		this.employeDao.save(g2);
-	*/
+		 */
 	}
 
 }

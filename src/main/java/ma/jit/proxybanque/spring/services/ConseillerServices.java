@@ -89,13 +89,24 @@ public class ConseillerServices implements IConseillerServices {
 	/*** Gestion des operations ***/
 
 	public Compte addOperation(DTOOperation dtoOperation) {
+		double newMontant = this.profit(dtoOperation.getMontant(), dtoOperation.getConseillerID());
 		if (dtoOperation.getType().equals("verser"))
-			return this.verser(dtoOperation.getCompteOne(), dtoOperation.getMontant());
+			return this.verser(dtoOperation.getCompteOne(), newMontant);
 		else if (dtoOperation.getType().equals("retirait"))
-			return this.retirer(dtoOperation.getCompteOne(), dtoOperation.getMontant());
+			return this.retirer(dtoOperation.getCompteOne(), newMontant);
 		else if (dtoOperation.getType().equals("virment"))
-			return this.virment(dtoOperation.getCompteOne(), dtoOperation.getCompteTwo(), dtoOperation.getMontant());
+			return this.virment(dtoOperation.getCompteOne(), dtoOperation.getCompteTwo(), newMontant);
 		return this.getCompte(dtoOperation.getCompteOne());
+	}
+
+	private double profit(double montant, int conseillerID) {
+		double profit = Math.ceil(montant * 5 / 100);
+		double newMontant = montant - profit;
+		Compte agenceCompte = this.getAgenceByConseiller(conseillerID).getCompte();
+		double actualSolde = agenceCompte.getSolde();
+		agenceCompte.setSolde(actualSolde + profit);
+		this.compteDao.save(agenceCompte);
+		return newMontant;
 	}
 
 	public Compte verser(int id, double montant) {
@@ -149,5 +160,6 @@ public class ConseillerServices implements IConseillerServices {
 		Employe gerant = this.employeDao.findById(idUser).get();
 		return gerant.getAgence();
 	}
+
 
 }

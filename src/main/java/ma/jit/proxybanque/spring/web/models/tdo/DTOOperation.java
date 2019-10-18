@@ -6,7 +6,7 @@ import ma.jit.proxybanque.spring.web.models.Versement;
 
 public class DTOOperation {
 
-	private int id, compteOne, compteTwo;
+	private int id, compteOne, compteTwo, conseillerID;
 	private double montant;
 	private String type;
 
@@ -65,14 +65,22 @@ public class DTOOperation {
 		this.type = type;
 	}
 
+	public int getConseillerID() {
+		return conseillerID;
+	}
+
+	public void setConseillerID(int conseillerID) {
+		this.conseillerID = conseillerID;
+	}
+
 	public Operation buildOperation() {
 		Operation operation;
-		if(this.type.equals("virser"))
+		if (this.type.equals("virser"))
 			operation = new Versement(this.montant);
 		else
 			operation = new Retrait(montant);
 		operation.setType();
 		return operation;
 	}
-	
+
 }
