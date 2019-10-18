@@ -26,6 +26,8 @@ public interface IConseillerServices {
 
 	void deleteCompte(int id);
 
+	Compte updateCompte(Compte compte);
+
 	/*** Gestion des operations ***/
 
 	Compte addOperation(DTOOperation dtoOperation);
@@ -37,5 +39,6 @@ public interface IConseillerServices {
 	Employer updateEmploye(DTOEmploye tdoEmp);
 
 	Employer getUser(String username);
+
 
 }

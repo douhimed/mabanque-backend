@@ -9,7 +9,7 @@ import javax.persistence.Entity;
 @DiscriminatorValue("CE")
 public class CompteEpargne extends Compte {
 
-	private double taux;
+	private double taux = 3;
 
 	public CompteEpargne() {
 	}
@@ -28,13 +28,7 @@ public class CompteEpargne extends Compte {
 	}
 
 	@Override
-	public String toString() {
-		return "CompteEpargne [taux=" + taux + ", toString()=" + super.toString() + "]";
-	}
-	
-	private String generateCode(int lingth) {
-		int m = (int) Math.pow(10, lingth - 1);
-		return String.valueOf(m + new Random().nextInt(9 * m));
+	public void setCarteType(String carteType) {	
 	}
 
 

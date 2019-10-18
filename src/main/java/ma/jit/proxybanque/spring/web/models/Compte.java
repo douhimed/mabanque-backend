@@ -32,7 +32,6 @@ public abstract class Compte {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private double solde;
-	// @JsonIgnore
 	private Date creationDate = new Date();
 	private String code = generateCode(7);
 
@@ -47,6 +46,7 @@ public abstract class Compte {
 	@JoinColumn(name = "agence_id", referencedColumnName = "id", nullable=true)
 	@JsonIgnoreProperties("compte")
 	private Agence agence;
+	protected String carteType;
 
 	public Compte() {
 	}
@@ -123,4 +123,10 @@ public abstract class Compte {
 	public void setAgence(Agence agence) {
 		this.agence = agence;
 	}
+	
+	public String getCarteType() {
+		return carteType;
+	}
+	
+	public abstract void setCarteType(String carteType);
 }

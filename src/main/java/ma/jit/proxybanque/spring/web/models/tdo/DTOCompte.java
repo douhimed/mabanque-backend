@@ -80,6 +80,7 @@ public class DTOCompte {
 		Compte compte;
 		if (this.type.equals("cc")) {
 			compte = new CompteCourant(solde,1000, this.carteType);
+			compte.setCarteType(this.carteType);
 		} else {
 			compte = new CompteEpargne(solde, 3);
 		}

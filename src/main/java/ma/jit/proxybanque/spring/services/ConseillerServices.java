@@ -48,11 +48,17 @@ public class ConseillerServices implements IConseillerServices {
 		this.clientDao.deleteById(id);
 	}
 
+	private Client getClientByCompte(int id) {
+		Compte cpm = this.compteDao.findById(id).get();
+		return cpm.getClient();
+	}
+	
 	@Override
 	public Client addClient(Client client, int employeId) {
 		client.setEmploye(this.getEmploye(employeId));
 
-		Compte compte = new CompteCourant(20, 100);
+		Compte compte = new CompteCourant(20, 1000);
+		compte.setCarteType("Premier");
 		String code = compte.getCode();
 		while (this.compteDao.findByCode(code) != null)
 			compte.setCode("");
@@ -85,6 +91,14 @@ public class ConseillerServices implements IConseillerServices {
 	public void deleteCompte(int id) {
 		this.compteDao.deleteById(id);
 	}
+	
+	@Override
+	public Compte updateCompte(Compte compte) {
+		Compte oldCompte = this.getCompte(compte.getId());
+		oldCompte.setCarteType(compte.getCarteType());
+		return this.compteDao.save(oldCompte);
+	}
+
 
 	/*** Gestion des operations ***/
 
@@ -119,11 +133,6 @@ public class ConseillerServices implements IConseillerServices {
 
 	public Compte retirer(int id, double montant) {
 		Compte compte = this.getCompte(id);
-		double facilitiesCaisse = 0;
-//		if (compte instanceof CompteCourant)
-//			facilitiesCaisse = ((CompteCourant) compte).getDecouvert();
-//		if (compte.getSolde() + facilitiesCaisse < montant)
-//			throw new RuntimeException("solde insuffisant");
 		Retrait retrait = new Retrait(montant, compte);
 		this.operationdao.save(retrait);
 		compte.setSolde(compte.getSolde() - montant);

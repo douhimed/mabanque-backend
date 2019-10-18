@@ -12,6 +12,7 @@ import ma.jit.proxybanque.spring.dao.AgenceDao;
 import ma.jit.proxybanque.spring.dao.EmployeDao;
 import ma.jit.proxybanque.spring.services.IParamDashboard;
 import ma.jit.proxybanque.spring.web.models.Agence;
+import ma.jit.proxybanque.spring.web.models.Conseiller;
 import ma.jit.proxybanque.spring.web.models.Employer;
 import ma.jit.proxybanque.spring.web.models.Gerant;
 
@@ -48,6 +49,11 @@ public class MabanqueBackendApplication implements CommandLineRunner {
 		
 		this.employeDao.save(g1);
 		this.employeDao.save(g2);
+		
+		Employer e1 =new Conseiller("test", "test", "test", bcryptEncoder.encode("test"), "test@gmail.com", "oujda");
+		e1.setAgence(a1);
+		this.employeDao.save(e1);
+		
 		 
 	}
 

@@ -7,8 +7,7 @@ import javax.persistence.Entity;
 @DiscriminatorValue("CC")
 public class CompteCourant extends Compte {
 
-	private double decouvert;
-	private String carteType;
+	private double decouvert = 1000;
 
 	public CompteCourant() {
 	}
@@ -35,13 +34,5 @@ public class CompteCourant extends Compte {
 		this.carteType = carteType;
 	}
 
-	public String getCarteType() {
-		return carteType;
-	}
-
-	@Override
-	public String toString() {
-		return "CompteCourant [decouvert=" + decouvert + ", toString()=" + super.toString() + "]";
-	}
 
 }
