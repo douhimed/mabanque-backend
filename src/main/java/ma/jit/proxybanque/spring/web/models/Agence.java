@@ -1,6 +1,7 @@
 package ma.jit.proxybanque.spring.web.models;
 
 import java.util.Collection;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -25,6 +26,7 @@ public class Agence {
 	@OneToOne(mappedBy = "agence")
 	@JsonIgnoreProperties("agence")
 	private Compte compte;
+	private Date creationDate;
 
 	public Agence() {
 	}
@@ -69,6 +71,14 @@ public class Agence {
 
 	public void setCompte(Compte compte) {
 		this.compte = compte;
+	}
+	
+	public Date getCreationDate() {
+		return creationDate;
+	}
+	
+	public void setCreationDate(Date creationDate) {
+		this.creationDate = creationDate;
 	}
 
 }

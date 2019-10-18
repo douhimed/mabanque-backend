@@ -31,6 +31,7 @@ public class ParamDashboard implements IParamDashboard {
 		compte.setAgence(agence);
 		this.compteDao.save(compte);
 		agence.setCompte(compte);
+		agence.setCreationDate(compte.getCreationDate());
 		return this.agenceDao.save(agence);
 	}
 

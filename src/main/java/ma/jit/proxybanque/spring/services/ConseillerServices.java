@@ -93,7 +93,7 @@ public class ConseillerServices implements IConseillerServices {
 			return this.verser(dtoOperation.getCompteOne(), dtoOperation.getMontant());
 		else if (dtoOperation.getType().equals("retirait"))
 			return this.retirer(dtoOperation.getCompteOne(), dtoOperation.getMontant());
-		else if (dtoOperation.getType().equals("virment")) {
+		else if (dtoOperation.getType().equals("virement")) {
 			return this.virment(dtoOperation);
 		}
 		return this.getCompte(dtoOperation.getCompteOne());
