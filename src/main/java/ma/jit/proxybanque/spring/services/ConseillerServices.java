@@ -133,6 +133,8 @@ public class ConseillerServices implements IConseillerServices {
 
 	public Compte retirer(int id, double montant) {
 		Compte compte = this.getCompte(id);
+		if(compte.getSolde()<montant)
+			throw new RuntimeException("solde insuffisant");
 		Retrait retrait = new Retrait(montant, compte);
 		this.operationdao.save(retrait);
 		compte.setSolde(compte.getSolde() - montant);
