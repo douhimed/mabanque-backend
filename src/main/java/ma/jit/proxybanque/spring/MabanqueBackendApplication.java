@@ -42,7 +42,7 @@ public class MabanqueBackendApplication implements CommandLineRunner {
 		Agence a2 = new Agence("Agence Sallam");
 		this.params.addAgance(a2);
 		
-		Employer g1 = new Gerant("DOUHI", "Mohammed", "med-douhi", bcryptEncoder.encode("pass"), "douhi@gmail.com", "Oujda LOT Douhi");
+		Employer g1 = new Gerant("DOUHI", "Mohammed", "med", bcryptEncoder.encode("pass"), "douhi@gmail.com", "Oujda LOT Douhi");
 		g1.setAgence(a1);
 		Employer g2 = new Gerant("RIAHI", "Azzedine", "riahi-azzedine", bcryptEncoder.encode("pass"), "riahi@gmail.com", "Rabat, EL Ouartassi");
 		g2.setAgence(a2);
@@ -52,6 +52,7 @@ public class MabanqueBackendApplication implements CommandLineRunner {
 		
 		Employer e1 =new Conseiller("test", "test", "test", bcryptEncoder.encode("test"), "test@gmail.com", "oujda");
 		e1.setAgence(a1);
+		e1.setIdResponsable(g1.getId());
 		this.employeDao.save(e1);
 		
 		 

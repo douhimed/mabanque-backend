@@ -106,7 +106,7 @@ public class ConseillerServices implements IConseillerServices {
 		if (dtoOperation.getType().equals("verser"))
 			return this.verser(dtoOperation.getCompteOne(), dtoOperation.getMontant());
 		else if (dtoOperation.getType().equals("retirait"))
-			return this.retirer(dtoOperation.getCompteOne(), dtoOperation.getMontant());
+			return this.retirer(dtoOperation.getCompteOne(), dtoOperation.getMontant(), true);
 		else if (dtoOperation.getType().equals("virement")) {
 			return this.virment(dtoOperation);
 		}
@@ -131,9 +131,9 @@ public class ConseillerServices implements IConseillerServices {
 		return this.compteDao.save(compte);
 	}
 
-	public Compte retirer(int id, double montant) {
+	public Compte retirer(int id, double montant, boolean flag) {
 		Compte compte = this.getCompte(id);
-		if(compte.getSolde()<montant)
+		if(flag && compte.getSolde()<montant)
 			throw new RuntimeException("solde insuffisant");
 		Retrait retrait = new Retrait(montant, compte);
 		this.operationdao.save(retrait);
@@ -148,11 +148,11 @@ public class ConseillerServices implements IConseillerServices {
 		
 		Compte cmp = this.getCompte(dtoOperation.getCompteOne());
 		if(cmp instanceof CompteCourant && cmp.getSolde() - dtoOperation.getMontant() <= -1000)
-			throw new RuntimeException("Vous avez atteindré le max de découvert, le virment possible : " + (1000 + cmp.getSolde()));
+			throw new RuntimeException("Le virement a atteint la limite, le virment possible : " + (1000 + cmp.getSolde()));
 		
 		double newMontant = this.profit(dtoOperation.getMontant(), dtoOperation.getConseillerID());
 		double montant = dtoOperation.getMontant();
-		retirer(dtoOperation.getCompteOne(), montant + (montant - newMontant));
+		retirer(dtoOperation.getCompteOne(), montant + (montant - newMontant), false);
 		return verser(dtoOperation.getCompteTwo(), montant);
 	}
 
