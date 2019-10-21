@@ -19,6 +19,15 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import io.jsonwebtoken.ExpiredJwtException;
 import ma.jit.proxybanque.spring.services.jwt.JwtUserDetailsService;
 
+/**
+ * <h3>JwtRequestFilter</h3>
+ * <p>Un filtre qui permet de tester la validiter du jeton</p>
+ * <p>Le jeton JWT toujours commence par Beare</>
+ *  
+ * @author proxybanque
+ * @version 1.0
+ *
+ */
 @Component
 @CrossOrigin(origins="*")
 public class JwtRequestFilter extends OncePerRequestFilter {
@@ -51,22 +60,22 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 			logger.warn("JWT Token does not begin with Bearer String");
 		}
 
-		// Once we get the token validate it.
+		// Une fois le jeton obtenu, validez-le.
 		if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
 
 			UserDetails userDetails = this.jwtUserDetailsService.loadUserByUsername(username);
 
-			// if token is valid configure Spring Security to manually set
-			// authentication
+			// si le jeton est valide, configurez Spring Security pour le définir manuellement
+			// authentification
 			if (jwtTokenUtil.validateToken(jwtToken, userDetails)) {
 
 				UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
 						userDetails, null, userDetails.getAuthorities());
 				usernamePasswordAuthenticationToken
 						.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-				// After setting the Authentication in the context, we specify
-				// that the current user is authenticated. So it passes the
-				// Spring Security Configurations successfully.
+				// Après avoir défini l'authentification dans le contexte, nous spécifions
+				// que l'utilisateur actuel est authentifié. Donc, il passe le
+				// Configuration de sécurité de printemps avec succès.
 				SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
 			}
 		}

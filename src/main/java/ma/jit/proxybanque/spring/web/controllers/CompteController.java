@@ -16,6 +16,22 @@ import ma.jit.proxybanque.spring.services.IConseillerServices;
 import ma.jit.proxybanque.spring.web.models.Compte;
 import ma.jit.proxybanque.spring.web.models.tdo.DTOCompte;
 
+/**
+ * 
+ * <h3>CompteController</h3>
+ * <p>Le point d'entrée de toutes requetes /comptes</p>
+ * <p>@RestController : envoyer les resultats sous format JSON par default</p>
+ * <p>@PostMapping</p> : l'ajout, les requete http/post</p>
+ * <p>@GetMapping : http/get </p>
+ * <p>@Putmapping : la modification, http/put</p>
+ * <p>@Deletemapping : la suppression, http/delete</p>
+ * <p>@PathVariable : une valeur d'apres url</p>
+ * <p>@RequestHeader : une valeur depuis l'entete de requete http</p>
+ * <p>@RequestBody :  les données envoye par le client sont enregistrer dans le corp</p>
+ * 
+ * @author proxybanque
+ * @version 1.0
+ */
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping("/comptes")

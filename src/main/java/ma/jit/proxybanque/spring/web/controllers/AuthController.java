@@ -19,6 +19,16 @@ import ma.jit.proxybanque.spring.services.jwt.JwtUserDetailsService;
 import ma.jit.proxybanque.spring.web.models.jwt.JwtRequest;
 import ma.jit.proxybanque.spring.web.models.jwt.JwtResponse;
 
+/**
+ * 
+ * <h3>AuthController</h3>
+ * <p>Le point d'entrée de toutes requetes d'authentification</p>
+ * <p>@RestController : envoyer les resultats sous format JSON par default</p>
+ * <p>PostMapping</p> : l'ajout, les requete http/post</p>
+ *
+ * @author proxybanque
+ * @version 1.0
+ */
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping("/authenticate")

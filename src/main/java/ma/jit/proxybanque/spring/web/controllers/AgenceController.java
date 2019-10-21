@@ -12,6 +12,16 @@ import ma.jit.proxybanque.spring.services.IGerantServices;
 import ma.jit.proxybanque.spring.web.models.Agence;
 import ma.jit.proxybanque.spring.web.models.Client;
 
+/**
+ * 
+ * <h3>AgenceController</h3>
+ * <p>Le point d'entrée de toutes requetes /employes</p>
+ * <p>@RestController : envoyer les resultats sous format JSON par default</p>
+ * <p>GetMapping : la consultation, les requete http/get </p>
+ *
+ * @author proxybanque
+ * @version 1.0
+ */
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping("/agences")

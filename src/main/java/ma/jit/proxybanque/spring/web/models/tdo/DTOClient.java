@@ -2,6 +2,16 @@ package ma.jit.proxybanque.spring.web.models.tdo;
 
 import ma.jit.proxybanque.spring.web.models.Client;
 
+/**
+ * <h3>DTOClient</h3>
+ * <p>Le DTO est un design pattern JEE permet l'echange des models ayant que des preprietes primitive</p>
+ * <p>Le client peut envoyer des données selon leur besoin, par exemple envoyer que le numéro de télephone</p>
+ * <p>Aussi nous permet de recuperer que les données se qu'on a besoin, le client peut envoyer des données corrompues, 
+ * d'où avec les méthodes de fabrication on crie des objets bien définie</p>
+ * 
+ * @author MED DOUHI
+ * @version 1.0
+ */
 public class DTOClient {
 
 	private int id, codePostal, conseillerID;

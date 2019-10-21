@@ -35,9 +35,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		// configure AuthenticationManager so that it knows from where to load
-		// user for matching credentials
-		// Use BCryptPasswordEncoder
+		// configure AuthenticationManager pour qu'il sache où charger
+		// utilisateur pour les informations d'identification correspondantes
+		// Utiliser BCryptPasswordEncoder
 		auth.userDetailsService(jwtUserDetailsService).passwordEncoder(passwordEncoder());
 	}
 
@@ -54,21 +54,22 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
-		// We don't need CSRF for this example
 		httpSecurity.cors().and().csrf().disable()
-				// dont authenticate this particular request
-				.authorizeRequests().antMatchers("/authenticate", "/register").permitAll().
-				// all other requests need to be authenticated
-				anyRequest().authenticated().and().
-				// make sure we use stateless session; session won't be used to
-				// store user's state.
+		// n'authentifie pas cette demande particulière
+		// public
+		.authorizeRequests().antMatchers("/authenticate").permitAll().
+		// toutes les autres demandes doivent être authentifiées
+		anyRequest().authenticated().and().
+		// assurez-vous que nous utilisons une session sans état; session ne sera pas utilisé pour
+		// stocke l'état de l'utilisateur.
 				exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()
 				.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
-		// Add a filter to validate the tokens with every request
+		// Ajoute un filtre pour valider les jetons à chaque requête
 		httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 	}
 	
+	// Une méthode qui permet de gérer le CORS et de définir des paramètres personnalisé ( id-user, id-client )
 	@Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();

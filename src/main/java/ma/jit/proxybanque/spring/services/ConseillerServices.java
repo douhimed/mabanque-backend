@@ -1,6 +1,5 @@
 package ma.jit.proxybanque.spring.services;
 
-import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +19,14 @@ import ma.jit.proxybanque.spring.web.models.Versement;
 import ma.jit.proxybanque.spring.web.models.tdo.DTOEmploye;
 import ma.jit.proxybanque.spring.web.models.tdo.DTOOperation;
 
+/**
+ * 
+ * <h3>ConseillerServices</h3>
+ * <p>Une implémentation de différents services gérer par le conseiller</p>
+ * 
+ * @author proxybanque
+ * @version 1.0
+ */
 @Service
 @Transactional
 public class ConseillerServices implements IConseillerServices {
@@ -46,11 +53,6 @@ public class ConseillerServices implements IConseillerServices {
 	@Override
 	public void deleteClient(int id) {
 		this.clientDao.deleteById(id);
-	}
-
-	private Client getClientByCompte(int id) {
-		Compte cpm = this.compteDao.findById(id).get();
-		return cpm.getClient();
 	}
 	
 	@Override

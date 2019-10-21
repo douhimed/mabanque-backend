@@ -14,6 +14,16 @@ import ma.jit.proxybanque.spring.web.models.Agence;
 import ma.jit.proxybanque.spring.web.models.Compte;
 import ma.jit.proxybanque.spring.web.models.CompteEpargne;
 
+/**
+ * 
+ * <h3>AgenceServices</h3>
+ * <p>Une implémentation pour tester avec une agence</p>
+ * <p>à ajouter des agences pour tester app</p>
+ * 
+ * @author proxybanque
+ * @version 1.0
+ */
+
 @Service
 @Transactional
 public class ParamDashboard implements IParamDashboard {

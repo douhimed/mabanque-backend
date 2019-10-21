@@ -17,6 +17,14 @@ import ma.jit.proxybanque.spring.web.models.Employer;
 import ma.jit.proxybanque.spring.web.models.tdo.DTOEmploye;
 import ma.jit.proxybanque.spring.web.models.tdo.DTOOperation;
 
+/**
+ * 
+ * <h3>GerantServices</h3>
+ * <p>Une implémentation de différents services d'un gérant, aussi avec une extention vers les services d'un conseiller</p>
+ * 
+ * @author proxybanque
+ * @version 1.0
+ */
 @Service
 @Transactional
 public class GerantServices extends ConseillerServices implements IGerantServices {

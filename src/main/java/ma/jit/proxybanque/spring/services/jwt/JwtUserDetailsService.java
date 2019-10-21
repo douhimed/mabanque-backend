@@ -15,6 +15,14 @@ import ma.jit.proxybanque.spring.web.models.Conseiller;
 import ma.jit.proxybanque.spring.web.models.Employer;
 import ma.jit.proxybanque.spring.web.models.tdo.DTOUser;
 
+/**
+ * 
+ * <h3>JwtUserDetailsService</h3>
+ * <p>Une classe pour la récupération d'un utilisateur, pour le service de vérification d'authentification</p>
+ * 
+ * @author proxybanque
+ * @version 1.0
+ */
 @Service
 public class JwtUserDetailsService implements UserDetailsService {
 	
