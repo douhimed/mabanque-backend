@@ -46,7 +46,7 @@ public class EmployeController {
 	}
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Void> delete(@PathVariable int id) {
+	public ResponseEntity<Void> delete(@PathVariable int id, @RequestHeader(name="id-user") int idGerant) {
 		this.gerantServices.deleteEmploye(id);
 		return ResponseEntity.noContent().build();
 	}

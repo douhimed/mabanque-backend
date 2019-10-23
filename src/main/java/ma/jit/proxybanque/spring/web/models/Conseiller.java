@@ -3,6 +3,7 @@ package ma.jit.proxybanque.spring.web.models;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -16,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @DiscriminatorValue("C")
 public class Conseiller extends Employer {
 
-	@OneToMany(mappedBy = "employe", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "employe", fetch = FetchType.LAZY, cascade= CascadeType.REFRESH)
 	@JsonIgnoreProperties("employe")
 	private Collection<Client> clients = new ArrayList<Client>();
 

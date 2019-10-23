@@ -9,7 +9,7 @@ import ma.jit.proxybanque.spring.web.models.Compte;
 import ma.jit.proxybanque.spring.web.models.Operation;
 
 /**
- * <h3>CompteDao</h3>
+ * <h3>OperationDao</h3>
  * <p>Fonctions générer par Spring Data, que les fonctions appelé dans la couche business seront générer</p>
  * <p>Les fonctions sont générées après les conventions de nommage</p>
  * <p>Exemple : </p>

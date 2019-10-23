@@ -9,11 +9,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ma.jit.proxybanque.spring.dao.AgenceDao;
+import ma.jit.proxybanque.spring.dao.ClientDao;
 import ma.jit.proxybanque.spring.dao.EmployeDao;
 import ma.jit.proxybanque.spring.web.models.Agence;
 import ma.jit.proxybanque.spring.web.models.Client;
 import ma.jit.proxybanque.spring.web.models.Compte;
+import ma.jit.proxybanque.spring.web.models.Conseiller;
 import ma.jit.proxybanque.spring.web.models.Employer;
+import ma.jit.proxybanque.spring.web.models.Gerant;
 import ma.jit.proxybanque.spring.web.models.tdo.DTOEmploye;
 import ma.jit.proxybanque.spring.web.models.tdo.DTOOperation;
 
@@ -31,6 +34,9 @@ public class GerantServices extends ConseillerServices implements IGerantService
 
 	@Autowired
 	private EmployeDao employeDao;
+	
+	@Autowired
+	private ClientDao clientDao;
 
 
 	@Autowired
@@ -103,6 +109,15 @@ public class GerantServices extends ConseillerServices implements IGerantService
 	@Override
 	public void deleteEmploye(int id) {
 		this.employeDao.deleteById(id);
+	}
+	
+	@Override
+	public void deleteEmploye(int idConseiller, int idGerant) {
+		this.clientDao.findAllByEmploye(new Conseiller(idConseiller)).forEach(client -> {
+			client.setEmploye(new Gerant(idGerant));
+			this.clientDao.save(client);
+		});
+		this.employeDao.deleteById(idConseiller);
 	}
 
 	@Override
