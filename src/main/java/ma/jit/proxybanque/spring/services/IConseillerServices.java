@@ -26,8 +26,6 @@ public interface IConseillerServices {
 
 	void deleteCompte(int id);
 
-	Compte updateCompte(Compte compte);
-
 	/*** Gestion des operations ***/
 
 	Compte addOperation(DTOOperation dtoOperation);

@@ -73,7 +73,7 @@ public class GerantServices extends ConseillerServices implements IGerantService
 	}
 
 	public Compte addCompte(Compte compte, int idClient) {
-		return conseillerServices.addCompte(compte, idClient);
+		throw new RuntimeException("SSSSSSSSSSSSSSSsss");
 	}
 
 	public void deleteCompte(int id) {
@@ -110,15 +110,7 @@ public class GerantServices extends ConseillerServices implements IGerantService
 	public void deleteEmploye(int id) {
 		this.employeDao.deleteById(id);
 	}
-	
-	@Override
-	public void deleteEmploye(int idConseiller, int idGerant) {
-		this.clientDao.findAllByEmploye(new Conseiller(idConseiller)).forEach(client -> {
-			client.setEmploye(new Gerant(idGerant));
-			this.clientDao.save(client);
-		});
-		this.employeDao.deleteById(idConseiller);
-	}
+
 
 	@Override
 	public Employer addEmploye(DTOEmploye tdoEmp, int idGerant) {

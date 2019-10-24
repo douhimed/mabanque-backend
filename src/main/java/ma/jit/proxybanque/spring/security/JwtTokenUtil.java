@@ -13,7 +13,6 @@ import org.springframework.stereotype.Component;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import ma.jit.proxybanque.spring.web.models.Employer;
 
 @Component
 public class JwtTokenUtil implements Serializable {

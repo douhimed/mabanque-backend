@@ -93,13 +93,7 @@ public class ConseillerServices implements IConseillerServices {
 	public void deleteCompte(int id) {
 		this.compteDao.deleteById(id);
 	}
-	
-	@Override
-	public Compte updateCompte(Compte compte) {
-		Compte oldCompte = this.getCompte(compte.getId());
-		oldCompte.setCarteType(compte.getCarteType());
-		return this.compteDao.save(oldCompte);
-	}
+
 
 
 	/*** Gestion des operations ***/

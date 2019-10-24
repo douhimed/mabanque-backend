@@ -51,12 +51,6 @@ public class CompteController {
 		return this.conseillerServices.addCompte(compte, tdoCompte.getClientId());
 	}
 
-	@PutMapping
-	public Compte updateCompte(@RequestBody DTOCompte tdoCompte) {
-		Compte compte = tdoCompte.buildCompte();
-		return this.conseillerServices.updateCompte(compte);
-	}
-
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> delete(@PathVariable int id) {
 		this.conseillerServices.deleteCompte(id);

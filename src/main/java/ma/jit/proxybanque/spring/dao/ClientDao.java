@@ -14,6 +14,7 @@ import ma.jit.proxybanque.spring.web.models.Employer;
  * 
  * @author proxybanque
  * @version 1.0
+ * 
  */
 @Repository
 public interface ClientDao extends JpaRepository<Client, Integer> {

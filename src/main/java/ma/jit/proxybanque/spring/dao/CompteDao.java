@@ -24,7 +24,4 @@ public interface CompteDao extends JpaRepository<Compte, Integer> {
 	List<Compte> findAllByClient(Client client);
 
 	Compte findByCode(String code);
-
-	Client findByClient(int id);
-
 }

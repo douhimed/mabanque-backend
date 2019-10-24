@@ -78,7 +78,7 @@ public class DTOOperation {
 		if (this.type.equals("virser"))
 			operation = new Versement(this.montant);
 		else
-			operation = new Retrait(montant);
+			operation = new Retrait(this.montant);
 		operation.setType();
 		return operation;
 	}

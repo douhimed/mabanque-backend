@@ -16,8 +16,6 @@ public interface IGerantServices extends IConseillerServices{
 	
 	List<Employer> getEmployesByGerant(int id);
 
-	void deleteEmploye(int idConseiller,  int idGerant);
-
 	Employer addEmploye(DTOEmploye tdoEmp, int idGerant);
 
 	void deleteEmploye(int id);

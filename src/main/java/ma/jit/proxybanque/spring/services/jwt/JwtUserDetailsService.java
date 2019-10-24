@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import ma.jit.proxybanque.spring.dao.EmployeDao;
 import ma.jit.proxybanque.spring.web.models.Conseiller;
 import ma.jit.proxybanque.spring.web.models.Employer;
-import ma.jit.proxybanque.spring.web.models.tdo.DTOUser;
 
 /**
  * 

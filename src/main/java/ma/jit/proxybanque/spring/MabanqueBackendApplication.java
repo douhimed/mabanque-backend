@@ -55,7 +55,6 @@ public class MabanqueBackendApplication implements CommandLineRunner {
 		e1.setIdResponsable(g1.getId());
 		this.employeDao.save(e1);
 		
-		 
 	}
 
 }

@@ -34,8 +34,5 @@ public class Gerant extends Employer {
 	public void setIdResponsable(int idReponsable) {
 		this.idResponsable = 0;
 	}
-
-
-
 	
 }
