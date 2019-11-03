@@ -1,15 +1,13 @@
 package org.miage.mabanquebackend.services;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Optional;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -18,15 +16,13 @@ import ma.jit.proxybanque.spring.dao.ClientDao;
 import ma.jit.proxybanque.spring.dao.CompteDao;
 import ma.jit.proxybanque.spring.dao.EmployeDao;
 import ma.jit.proxybanque.spring.services.ConseillerServices;
-import ma.jit.proxybanque.spring.web.models.Agence;
 import ma.jit.proxybanque.spring.web.models.Client;
 import ma.jit.proxybanque.spring.web.models.Compte;
 import ma.jit.proxybanque.spring.web.models.CompteCourant;
 import ma.jit.proxybanque.spring.web.models.Conseiller;
 import ma.jit.proxybanque.spring.web.models.Employer;
-import ma.jit.proxybanque.spring.web.models.Gerant;
 
-public class ConseillerServicesTests {
+class ConseillerServicesTests {
 
 	@Mock
 	private ClientDao clientDao;
@@ -40,8 +36,8 @@ public class ConseillerServicesTests {
 	@InjectMocks
 	private ConseillerServices services;
 
-	@Before
-	public void setUpBeforeeach() {
+	@BeforeEach
+	void setUp() throws Exception{
 		MockitoAnnotations.initMocks(this);
 	}
 
