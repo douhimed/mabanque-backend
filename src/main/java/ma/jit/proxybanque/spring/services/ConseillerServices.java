@@ -9,6 +9,7 @@ import ma.jit.proxybanque.spring.dao.ClientDao;
 import ma.jit.proxybanque.spring.dao.CompteDao;
 import ma.jit.proxybanque.spring.dao.EmployeDao;
 import ma.jit.proxybanque.spring.dao.OperationDao;
+import ma.jit.proxybanque.spring.services.exceptions.ServiceExceptions;
 import ma.jit.proxybanque.spring.web.models.Agence;
 import ma.jit.proxybanque.spring.web.models.Client;
 import ma.jit.proxybanque.spring.web.models.Compte;
@@ -56,7 +57,7 @@ public class ConseillerServices implements IConseillerServices {
 	}
 	
 	@Override
-	public Client addClient(Client client, int employeId) {
+	public Client addClient(Client client, int employeId) throws ServiceExceptions {
 		client.setEmploye(this.getEmploye(employeId));
 
 		Compte compte = new CompteCourant(20, 1000);
@@ -84,21 +85,22 @@ public class ConseillerServices implements IConseillerServices {
 	}
 
 	@Override
-	public Compte addCompte(Compte compte, int idClient) {
+	public Compte addCompte(Compte compte, int idClient) throws ServiceExceptions {
 		compte.setClient(this.getClients(idClient));
 		return this.compteDao.save(compte);
 	}
 
 	@Override
-	public void deleteCompte(int id) {
+	public void deleteCompte(int id) throws ServiceExceptions {
 		this.compteDao.deleteById(id);
 	}
 
 
 
-	/*** Gestion des operations ***/
+	/*** Gestion des operations 
+	 * @throws ServiceExceptions ***/
 
-	public Compte addOperation(DTOOperation dtoOperation) {
+	public Compte addOperation(DTOOperation dtoOperation) throws ServiceExceptions {
 		if (dtoOperation.getType().equals("verser"))
 			return this.verser(dtoOperation.getCompteOne(), dtoOperation.getMontant());
 		else if (dtoOperation.getType().equals("retirait"))

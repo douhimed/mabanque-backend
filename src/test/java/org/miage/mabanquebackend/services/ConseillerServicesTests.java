@@ -16,6 +16,7 @@ import ma.jit.proxybanque.spring.dao.ClientDao;
 import ma.jit.proxybanque.spring.dao.CompteDao;
 import ma.jit.proxybanque.spring.dao.EmployeDao;
 import ma.jit.proxybanque.spring.services.ConseillerServices;
+import ma.jit.proxybanque.spring.services.exceptions.ServiceExceptions;
 import ma.jit.proxybanque.spring.web.models.Client;
 import ma.jit.proxybanque.spring.web.models.Compte;
 import ma.jit.proxybanque.spring.web.models.CompteCourant;
@@ -87,7 +88,7 @@ class ConseillerServicesTests {
 	}
 
 	@Test
-	public void addCompte_ShouldReturnNewAddedCompte() {
+	public void addCompte_ShouldReturnNewAddedCompte() throws ServiceExceptions {
 
 		Compte expectedCompte = new CompteCourant();
 		expectedCompte.setId(1);

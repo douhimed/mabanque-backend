@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ma.jit.proxybanque.spring.dao.AgenceDao;
 import ma.jit.proxybanque.spring.dao.ClientDao;
 import ma.jit.proxybanque.spring.dao.EmployeDao;
+import ma.jit.proxybanque.spring.services.exceptions.ServiceExceptions;
 import ma.jit.proxybanque.spring.web.models.Agence;
 import ma.jit.proxybanque.spring.web.models.Client;
 import ma.jit.proxybanque.spring.web.models.Compte;
@@ -52,18 +53,19 @@ public class GerantServices extends ConseillerServices implements IGerantService
 		conseillerServices.deleteClient(id);
 	}
 
-	public Client addClient(Client client, int conseillerID) {
-		throw new RuntimeException("Not Allowed");
+	public Client addClient(Client client, int conseillerID) throws ServiceExceptions {
+		throw new ServiceExceptions("Not Allowed");
 	}
 
 	public Client updateClient(Client client, int conseillerID) {
 		return conseillerServices.updateClient(client, conseillerID);
 	}
 
-	/*** Gestion des operations ***/
+	/*** Gestion des operations 
+	 * @throws ServiceExceptions ***/
 
-	public Compte addOperation(DTOOperation dtoOperation) {
-		throw new RuntimeException("Not Allowed");
+	public Compte addOperation(DTOOperation dtoOperation) throws ServiceExceptions {
+		throw new ServiceExceptions("Not Allowed");
 	}
 
 	/*** Gestion des comptes ***/
@@ -72,12 +74,12 @@ public class GerantServices extends ConseillerServices implements IGerantService
 		return conseillerServices.getCompte(id);
 	}
 
-	public Compte addCompte(Compte compte, int idClient) {
-		throw new RuntimeException("Not Allowed");
+	public Compte addCompte(Compte compte, int idClient) throws ServiceExceptions {
+		throw new ServiceExceptions("Not Allowed");
 	}
 
-	public void deleteCompte(int id) {
-		throw new RuntimeException("Not Allowed");
+	public void deleteCompte(int id) throws ServiceExceptions {
+		throw new ServiceExceptions("Not Allowed");
 	}
 
 	/*** Gestion des employes ***/
