@@ -6,11 +6,9 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-import org.assertj.core.util.Arrays;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -20,7 +18,6 @@ import org.mockito.MockitoAnnotations;
 import ma.jit.proxybanque.spring.dao.ClientDao;
 import ma.jit.proxybanque.spring.dao.CompteDao;
 import ma.jit.proxybanque.spring.dao.EmployeDao;
-import ma.jit.proxybanque.spring.services.ConseillerServices;
 import ma.jit.proxybanque.spring.services.GerantServices;
 import ma.jit.proxybanque.spring.services.exceptions.ServiceExceptions;
 import ma.jit.proxybanque.spring.web.models.Agence;
