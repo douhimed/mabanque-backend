@@ -53,7 +53,7 @@ public class GerantServices extends ConseillerServices implements IGerantService
 	}
 
 	public Client addClient(Client client, int conseillerID) {
-		return conseillerServices.addClient(client, conseillerID);
+		throw new RuntimeException("Not Allowed");
 	}
 
 	public Client updateClient(Client client, int conseillerID) {
@@ -63,7 +63,7 @@ public class GerantServices extends ConseillerServices implements IGerantService
 	/*** Gestion des operations ***/
 
 	public Compte addOperation(DTOOperation dtoOperation) {
-		return conseillerServices.addOperation(dtoOperation);
+		throw new RuntimeException("Not Allowed");
 	}
 
 	/*** Gestion des comptes ***/
@@ -73,11 +73,11 @@ public class GerantServices extends ConseillerServices implements IGerantService
 	}
 
 	public Compte addCompte(Compte compte, int idClient) {
-		throw new RuntimeException("SSSSSSSSSSSSSSSsss");
+		throw new RuntimeException("Not Allowed");
 	}
 
 	public void deleteCompte(int id) {
-		conseillerServices.deleteCompte(id);
+		throw new RuntimeException("Not Allowed");
 	}
 
 	/*** Gestion des employes ***/
