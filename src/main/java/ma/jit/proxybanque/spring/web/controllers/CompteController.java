@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import ma.jit.proxybanque.spring.services.IConseillerServices;
+import ma.jit.proxybanque.spring.services.exceptions.ServiceExceptions;
 import ma.jit.proxybanque.spring.web.models.Compte;
 import ma.jit.proxybanque.spring.web.models.tdo.DTOCompte;
 
@@ -46,13 +47,13 @@ public class CompteController {
 	}
 
 	@PostMapping
-	public Compte addCompte(@RequestBody DTOCompte tdoCompte) {
+	public Compte addCompte(@RequestBody DTOCompte tdoCompte) throws ServiceExceptions {
 		Compte compte = tdoCompte.buildCompte();
 		return this.conseillerServices.addCompte(compte, tdoCompte.getClientId());
 	}
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Void> delete(@PathVariable int id) {
+	public ResponseEntity<Void> delete(@PathVariable int id) throws ServiceExceptions {
 		this.conseillerServices.deleteCompte(id);
 		return ResponseEntity.noContent().build();
 	}

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import ma.jit.proxybanque.spring.services.IConseillerServices;
+import ma.jit.proxybanque.spring.services.exceptions.ServiceExceptions;
 import ma.jit.proxybanque.spring.web.models.Compte;
 import ma.jit.proxybanque.spring.web.models.tdo.DTOOperation;
 
@@ -31,7 +32,7 @@ public class OperationController {
 	private IConseillerServices conseillerServices;
 
 	@PostMapping
-	public Compte saveOperation(@RequestBody DTOOperation dtoOperation) {
+	public Compte saveOperation(@RequestBody DTOOperation dtoOperation) throws ServiceExceptions {
 		return this.conseillerServices.addOperation(dtoOperation);
 	}
 	

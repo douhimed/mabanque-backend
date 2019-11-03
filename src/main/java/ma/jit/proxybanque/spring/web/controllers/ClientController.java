@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import ma.jit.proxybanque.spring.services.IConseillerServices;
+import ma.jit.proxybanque.spring.services.exceptions.ServiceExceptions;
 import ma.jit.proxybanque.spring.web.models.Client;
 import ma.jit.proxybanque.spring.web.models.tdo.DTOClient;
 
@@ -56,7 +57,12 @@ public class ClientController {
 
 	@PostMapping
 	public Client addClient(@RequestBody DTOClient tdoClient) {
-		return this.conseillerServices.addClient(tdoClient.buildClient(), tdoClient.getConseillerID());
+		try {
+			return this.conseillerServices.addClient(tdoClient.buildClient(), tdoClient.getConseillerID());
+		} catch (ServiceExceptions e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	@PutMapping
